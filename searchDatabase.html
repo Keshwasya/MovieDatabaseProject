@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Movie Database page</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  
+  <script src='https://kit.fontawesome.com/a076d05399.js'></script><!-- adds icons for bootstrap 4 -->
+  <link href="./public/android-chrome-192x192.png" rel="icon">
+  <link href="database.css" rel="stylesheet"> <!--style sheet for database-->
+  <style>
+
+html body { 
+    align-content: center;
+    align-items: center;
+    align-self: center;
+    text-align: center;
+  }
+  </style>
+</head>
+
+
+
+<body id="top">
+
+    <div class="jumbotron text-center" style="margin-bottom:0">
+    <!-- <h1 style="color: black;">The 7th Art</h1> -->
+    <a><img src="./public/Logo&Name.png"  alt="My Logo" id="LogoName"></a>
+    </div>
+
+
+    <div>
+        <div class="collapse" id="navbarToggleExternalContent">
+          <div class="bg-dark p-4">
+            <h4 class="text-white">Collapsed content</h4>
+            <span class="text-muted">Toggleable via the navbar brand.</span>
+          </div>
+        </div>
+        <nav class="navbar navbar-dark bg-dark">
+            <a class="navbar-brand" href="./homePage.html"><img src="./public/android-chrome-192x192.png" alt="My Logo" id="Logo"></a>  
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <ul class="navbar-nav ml-auto">
+                <form class="form-inline" > 
+                    <input class="form-control mr-sm-2" style="float: left;" type="text" id="searchBar" placeholder="Search">
+                    <button class="btn btn-success" style="float: left;" type="submit" onclick="execute(document.getElementById('searchBar').value);">Search</button>
+                </form>
+            </ul>
+        </nav>
+    </div>
+    <br>
+
+    
+    <footer >
+        <a href="#top"><br><br><br><br>Top Of Page</a>
+        &copy;Kesh 2020
+    </footer>
+</body>
+</html>
