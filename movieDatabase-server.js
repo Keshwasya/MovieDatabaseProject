@@ -18,6 +18,7 @@ let mimeLookup = {
 //Remember, you can break this apart to make it look cleaner
 const server = http.createServer(function (request, response) {
 	console.log("URL: " + request.url);
+
 	if(request.method === "GET"){
 		if(request.url === "/homePage.html" || request.url === "/" || request.url === "/homePage.html#top"){
 			fs.readFile("homePage.html", function(err, data){
@@ -149,12 +150,13 @@ const server = http.createServer(function (request, response) {
 			});
 		}else{
 			response.statusCode = 404;
-			response.end("Unknown resource (Url/Path)mmm.");
+			response.end("Unknown resource (Url/Path).");
 		}
 		
 	}else{
+		//post functions
 		response.statusCode = 404;
-		response.end("Unknown resource (Url/Path).");
+		response.end("Unknown resource (Url/Path)mmm.");
 	}
 });
 
