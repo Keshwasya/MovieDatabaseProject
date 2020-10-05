@@ -60,6 +60,94 @@ const server = http.createServer(function (request, response) {
 				response.setHeader("Content-Type", "text/html");
 				response.end(data);
 			});
+		}else if(request.url === "/userPage.html"){
+            fs.readFile("userPage.html", function(err, data){
+				if(err){
+					response.statusCode = 500;
+					response.end("Error reading file.");
+					return;
+				}
+				response.statusCode = 200;
+				response.setHeader("Content-Type", "text/html");
+				response.end(data);
+			});
+		}else if(request.url === "/signUp.html"){
+            fs.readFile("signUp.html", function(err, data){
+				if(err){
+					response.statusCode = 500;
+					response.end("Error reading file.");
+					return;
+				}
+				response.statusCode = 200;
+				response.setHeader("Content-Type", "text/html");
+				response.end(data);
+			});
+		}else if(request.url === "/searchDatabase.html"){
+            fs.readFile("searchDatabase.html", function(err, data){
+				if(err){
+					response.statusCode = 500;
+					response.end("Error reading file.");
+					return;
+				}
+				response.statusCode = 200;
+				response.setHeader("Content-Type", "text/html");
+				response.end(data);
+			});
+		}else if(request.url === "/personPage.html"){
+            fs.readFile("personPage.html", function(err, data){
+				if(err){
+					response.statusCode = 500;
+					response.end("Error reading file.");
+					return;
+				}
+				response.statusCode = 200;
+				response.setHeader("Content-Type", "text/html");
+				response.end(data);
+			});
+		}else if(request.url === "/otherUserPage.html"){
+            fs.readFile("otherUserPage.html", function(err, data){
+				if(err){
+					response.statusCode = 500;
+					response.end("Error reading file.");
+					return;
+				}
+				response.statusCode = 200;
+				response.setHeader("Content-Type", "text/html");
+				response.end(data);
+			});
+		}else if(request.url === "/forgotPassword.html"){
+            fs.readFile("forgotPassword.html", function(err, data){
+				if(err){
+					response.statusCode = 500;
+					response.end("Error reading file.");
+					return;
+				}
+				response.statusCode = 200;
+				response.setHeader("Content-Type", "text/html");
+				response.end(data);
+			});
+		}else if(request.url === "/moviePage.html"){
+            fs.readFile("moviePage.html", function(err, data){
+				if(err){
+					response.statusCode = 500;
+					response.end("Error reading file.");
+					return;
+				}
+				response.statusCode = 200;
+				response.setHeader("Content-Type", "text/html");
+				response.end(data);
+			});
+		}else if(request.url === "/login.html"){
+            fs.readFile("login.html", function(err, data){
+				if(err){
+					response.statusCode = 500;
+					response.end("Error reading file.");
+					return;
+				}
+				response.statusCode = 200;
+				response.setHeader("Content-Type", "text/html");
+				response.end(data);
+			});
 		}else if(request.url === "/database.css"){
             fs.readFile("database.css", function(err, data){
 				if(err){
