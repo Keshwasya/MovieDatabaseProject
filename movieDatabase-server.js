@@ -5,12 +5,21 @@ var express = require('express');
 var app = express();
 let path = require('path');
 
+const mongo = require('mongodb');
+const mongoClient = mongo.MongoClient;
+
 app.use(express.static('/public'));
 app.get('/', function(req,res){
-    // console.log("reading");
+    res.sendFile(__dirname + "/homePage.html");
 });
 
-let mimeLookup = {
+app.use("/js", express.static(__dirname + "/js"));
+app.use("/database", express.static(__dirname + "/database"));
+app.use("/images", express.static(__dirname + "/images"));
+
+app.listen(3000);
+
+/*let mimeLookup = {
 	'.js': 'application/javascript',
 	'.html': 'text/html',
 	'.jpg': 'image/jpeg'
@@ -79,7 +88,7 @@ const server = http.createServer(function (request, response) {
 					return;
 				}
 				response.statusCode = 200;
-				response.setHeader("Content-Type", "image/jpeg");
+				//response.setHeader("Content-Type", "image/jpeg");
 				fs.createReadStream(filepath).pipe(response);
 				response.end(data);
 			});
@@ -95,5 +104,5 @@ const server = http.createServer(function (request, response) {
 });
 
 //Server listens on port 3000
-server.listen(3000);
+server.listen(3000);*/
 console.log('Server running at http://127.0.0.1:3000/');

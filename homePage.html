@@ -29,11 +29,13 @@ html body { /*Sets background to be black*/
 
     <div class="jumbotron text-center" style="margin-bottom:0">
     <!-- <h1 style="color: black;">The 7th Art</h1> -->
-    <a><img src="./public/Logo&Name.png"  alt="My Logo" id="LogoName"></a>
+    <!-- <a><img src="/images/name.png"  alt="My Logo" id="LogoName"></a> -->
+    <img src="/images/logo.png">
+    <h1>The 7th Art</h1>
     </div>
 
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
-        <a class="navbar-brand" href="./homePage.html"><img src="./public/android-chrome-192x192.png" alt="My Logo" id="Logo" ></a>
+        <a class="navbar-brand" href="./homePage.html"><i class="fa fa-bars" aria-hidden=true></i></a>
         <ul class="navbar-nav ml-auto">
             <li class="nav-item"> 
                 <a class="nav-link" href="./login.html"> 
@@ -66,65 +68,19 @@ html body { /*Sets background to be black*/
         <div id="moviePosters"  class="container-fluid">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-sm"><img src="./public/booksmart.jpg" alt="booksmart"></div>
-                    <div class="col-sm"><img src="./Img/MoviePosters/GetOut.jpg" alt="Get Out"></div>
-                    <div class="col-sm"><img src="./Img/MoviePosters/CityOfGod.jpg" alt=""></div>
+                    
                 </div>
             </div>  
-
-            <div class="container-fluid">
-                <div class="row">
-                    
-                    <div class="col-sm"><img src="./Img/MoviePosters/dope.jpg" alt=""></div>
-                    <div class="col-sm"><img src="./Img/MoviePosters/FantasicMrFox.jpg" alt=""></div>
-                    <div class="col-sm"><img src="./Img/MoviePosters/greatEscape.jpg" alt=""></div>
-                    
-                </div>  
-            </div>
-
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-sm"><img src="./Img/MoviePosters/grandBudapestHotel.jpg" alt=""></div>
-                    <div class="col-sm"><img src="./Img/MoviePosters/cabinInTheWoods.jpg" alt=""></div>
-                    <div class="col-sm"><img src="./Img/MoviePosters/knivesOut.jpg" alt=""></div>
-                </div>  
-            </div>
-
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-sm"><img src="./Img/MoviePosters/MarriageStory.jpg" alt=""></div>
-                    <div class="col-sm"><img src="./Img/MoviePosters/midsommar.jpg" alt=""></div>
-                    <div class="col-sm"><img src="./Img/MoviePosters/parasite.jpg" alt=""></div>        
-                </div>  
-            </div>
-
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-sm"><img src="./Img/MoviePosters/socialNetwork.jpg" alt=""></div>
-                    <div class="col-sm"><img src="./Img/MoviePosters/TheMartian.jpg" alt=""></div>
-                    <div class="col-sm"><img src="./Img/MoviePosters/uncutGems.jpg" alt=""></div>
-                </div>  
-            </div>
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-sm"><img src="./Img/MoviePosters/hotFuzz.jpg" alt=""></div>
-                    <div class="col-sm"><img src="./Img/MoviePosters/scottPilgrim.jpg" alt=""></div>
-                    <div class="col-sm"><img src="./Img/MoviePosters/whiplash.jpg" alt=""></div>
-                </div>  
-            </div>
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-sm"><img src="./Img/MoviePosters/it.jpg" alt=""></div>
-                    <div class="col-sm"><img src="./Img/MoviePosters/darkKnight.jpg" alt=""></div>
-                    <div class="col-sm"><img src="./Img/MoviePosters/2Popes.jpg" alt=""></div>
-                </div>  
-            </div>
-
         </div>
     </div>
-    <footer >
-        <a href="#top"><br><br><br><br>Top Of Page</a>
-        &copy;Kesh 2020
+    <footer>
+        <div class="bottom-bar">
+            <a href="#top"><i class="fa fa-arrow-up" aria-hidden=true></i></a>
+            <p>&copy;Kesh + Dan 2020</p>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+        
+        <script src="/js/homepage.js"></script>
       </footer>
 </body>
 </html>
