@@ -1,0 +1,27 @@
+{
+  "name": "moviedatabaseproject",
+  "version": "1.0.0",
+  "description": "Movie database project for COMP2406",
+  "main": "movieDatabase-server.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "jquery": "^3.5.1",
+    "jsdom": "^16.4.0",
+    "mongodb": "^3.6.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "test",
+    "start": "node movieDatabase-server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Keshwasya/MovieDatabaseProject.git"
+  },
+  "author": "Keshwasya Singh & Daniel Bala",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Keshwasya/MovieDatabaseProject/issues"
+  },
+  "homepage": "https://github.com/Keshwasya/MovieDatabaseProject#readme"
+}

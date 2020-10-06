@@ -10,7 +10,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   
   <script src='https://kit.fontawesome.com/a076d05399.js'></script><!-- adds icons for bootstrap 4 -->
-  <link href="./public/android-chrome-192x192.png" rel="icon">
+  <link href="./public/favicon-16x16.png" rel="icon">
   <link href="database.css" rel="stylesheet"> <!--style sheet for database-->
   <style>
 
@@ -23,8 +23,6 @@ html body {
   </style>
 </head>
 
-
-
 <body id="top">
 
     <div class="jumbotron text-center" style="margin-bottom:0">
@@ -32,29 +30,36 @@ html body {
     <a><img src="./public/Logo&Name.png"  alt="My Logo" id="LogoName"></a>
     </div>
 
-
-    <div>
-        <div class="collapse" id="navbarToggleExternalContent">
-          <div class="bg-dark p-4">
-            <h4 class="text-white">Collapsed content</h4>
-            <span class="text-muted">Toggleable via the navbar brand.</span>
-          </div>
-        </div>
-        <nav class="navbar navbar-dark bg-dark">
-            <a class="navbar-brand" href="./homePage.html"><img src="./public/android-chrome-192x192.png" alt="My Logo" id="Logo"></a>  
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <ul class="navbar-nav ml-auto">
-                <form class="form-inline" > 
-                    <input class="form-control mr-sm-2" style="float: left;" type="text" id="searchBar" placeholder="Search">
-                    <button class="btn btn-success" style="float: left;" type="submit" onclick="execute(document.getElementById('searchBar').value);">Search</button>
-                </form>
-            </ul>
-        </nav>
+    
+    <div class="collapse" id="navbarToggleExternalContent">
+    <div class="bg-dark p-4">
+        <h4 class="text-white">This is where the diffrent movie genres will go</h4>
     </div>
-    <br>
+    </div>
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="./homePage.html"><img src="./public/navLogo.png" alt="My Logo" id="Logo"></a>  
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <ul class="navbar-nav ml-auto">
+            <form class="form-inline" > 
+                <input class="form-control mr-sm-2" style="float: left;" type="text" id="searchBar" placeholder="Search">
+                <button class="btn btn-success" style="float: left;" type="submit" onclick="execute(document.getElementById('searchBar').value);">Search</button>
+            </form>
+        </ul>
+    </nav>
 
+    <div class="container">
+        <br>
+        <div class="container" style="margin-top:30px" class="text-white bg-dark">
+            <h2 class="display0-4" >Search Movie database</h2>
+            <p style="text-align: center;"><br>Enter movie name in search bar to look up movie by 
+                name. The button in the nav bar will open and contain diffrent genres to sort movies by. <br><br><br>
+            </p>
+
+            </div>
+        </div>
+    </div>
     
     <footer >
         <a href="#top"><br><br><br><br>Top Of Page</a>

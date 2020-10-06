@@ -1,10 +1,9 @@
 
 const http = require('http');
 const fs = require("fs");
-var express = require('express');
-var app = express();
 let path = require('path');
 
+<<<<<<< HEAD
 const mongo = require('mongodb');
 const mongoClient = mongo.MongoClient;
 
@@ -12,6 +11,9 @@ app.use(express.static('/public'));
 app.get('/', function(req,res){
     res.sendFile(__dirname + "/homePage.html");
 });
+=======
+
+>>>>>>> 3f0f6b243147478b9b8745c95c5c33dcfea2bef2
 
 app.use("/js", express.static(__dirname + "/js"));
 app.use("/database", express.static(__dirname + "/database"));
@@ -22,7 +24,8 @@ app.listen(3000);
 /*let mimeLookup = {
 	'.js': 'application/javascript',
 	'.html': 'text/html',
-	'.jpg': 'image/jpeg'
+	'.jpg': 'image/jpeg',
+	'.png': 'image/png'
 };
 
 //Create a server, giving it the handler function
@@ -32,31 +35,7 @@ app.listen(3000);
 const server = http.createServer(function (request, response) {
 	console.log("URL: " + request.url);
 
-	let fileurl;
-	if (request.url == '/'){
-		fileurl = '/homePage.html';
-	}else{
-		fileurl = request.url;
-	}
-
-	let filepath = path.resolve('./' + fileurl);
-	console.log("URL Requested: " + filepath);
 	if(request.method === "GET"){
-
-		
-		
-		//Find the file's path using the path module
-		//Be careful how you do this - you could give access to everything accidentally
-		//let filepath = path.resolve('./' + fileurl);
-		// lookup mime type of file
-		//let fileExt = path.extname(filepath);
-		//let mimeType = mimeLookup[fileExt];
-		//response.writeHead(200, { 'content-type': mimeType });
-			//pipe method is passing the data read from
-			//the file into the response object
-		
-
-
 		if(request.url === "/homePage.html" || request.url === "/" || request.url === "/homePage.html#top"){
 			fs.readFile("homePage.html", function(err, data){
 				if(err){
@@ -65,6 +44,94 @@ const server = http.createServer(function (request, response) {
 					return;
                 }
                 
+				response.statusCode = 200;
+				response.setHeader("Content-Type", "text/html");
+				response.end(data);
+			});
+		}else if(request.url === "/userPage.html"){
+            fs.readFile("userPage.html", function(err, data){
+				if(err){
+					response.statusCode = 500;
+					response.end("Error reading file.");
+					return;
+				}
+				response.statusCode = 200;
+				response.setHeader("Content-Type", "text/html");
+				response.end(data);
+			});
+		}else if(request.url === "/signUp.html"){
+            fs.readFile("signUp.html", function(err, data){
+				if(err){
+					response.statusCode = 500;
+					response.end("Error reading file.");
+					return;
+				}
+				response.statusCode = 200;
+				response.setHeader("Content-Type", "text/html");
+				response.end(data);
+			});
+		}else if(request.url === "/searchDatabase.html"){
+            fs.readFile("searchDatabase.html", function(err, data){
+				if(err){
+					response.statusCode = 500;
+					response.end("Error reading file.");
+					return;
+				}
+				response.statusCode = 200;
+				response.setHeader("Content-Type", "text/html");
+				response.end(data);
+			});
+		}else if(request.url === "/personPage.html"){
+            fs.readFile("personPage.html", function(err, data){
+				if(err){
+					response.statusCode = 500;
+					response.end("Error reading file.");
+					return;
+				}
+				response.statusCode = 200;
+				response.setHeader("Content-Type", "text/html");
+				response.end(data);
+			});
+		}else if(request.url === "/otherUserPage.html"){
+            fs.readFile("otherUserPage.html", function(err, data){
+				if(err){
+					response.statusCode = 500;
+					response.end("Error reading file.");
+					return;
+				}
+				response.statusCode = 200;
+				response.setHeader("Content-Type", "text/html");
+				response.end(data);
+			});
+		}else if(request.url === "/forgotPassword.html"){
+            fs.readFile("forgotPassword.html", function(err, data){
+				if(err){
+					response.statusCode = 500;
+					response.end("Error reading file.");
+					return;
+				}
+				response.statusCode = 200;
+				response.setHeader("Content-Type", "text/html");
+				response.end(data);
+			});
+		}else if(request.url === "/moviePage.html"){
+            fs.readFile("moviePage.html", function(err, data){
+				if(err){
+					response.statusCode = 500;
+					response.end("Error reading file.");
+					return;
+				}
+				response.statusCode = 200;
+				response.setHeader("Content-Type", "text/html");
+				response.end(data);
+			});
+		}else if(request.url === "/login.html"){
+            fs.readFile("login.html", function(err, data){
+				if(err){
+					response.statusCode = 500;
+					response.end("Error reading file.");
+					return;
+				}
 				response.statusCode = 200;
 				response.setHeader("Content-Type", "text/html");
 				response.end(data);
@@ -80,17 +147,29 @@ const server = http.createServer(function (request, response) {
 				response.setHeader("Content-Type", "text/css");
 				response.end(data);
 			});
-		}else if(request.url === filepath){
-            fs.readFile(filepath, function(err, data){
+		}else if(path.parse(request.url).dir === "/public"){
+            fs.readFile("./public/" + path.parse(request.url).base, function(err, data){
 				if(err){
 					response.statusCode = 500;
 					response.end("Error reading file.");
 					return;
 				}
+<<<<<<< HEAD
 				response.statusCode = 200;
 				//response.setHeader("Content-Type", "image/jpeg");
 				fs.createReadStream(filepath).pipe(response);
 				response.end(data);
+=======
+				if(path.extname(request.url) == ".jpg"){
+					response.writeHead(200, {'content-type': 'image/jpg'});
+				}else{
+					response.writeHead(200, {'content-type': 'image/png'});
+				}
+				
+				response.write(data);
+				response.end();
+				
+>>>>>>> 3f0f6b243147478b9b8745c95c5c33dcfea2bef2
 			});
 		}else{
 			response.statusCode = 404;
@@ -98,8 +177,9 @@ const server = http.createServer(function (request, response) {
 		}
 		
 	}else{
+		//post functions
 		response.statusCode = 404;
-		response.end("Unknown resource (Url/Path).");
+		response.end("Unknown resource (Url/Path)mmm.");
 	}
 });
 
