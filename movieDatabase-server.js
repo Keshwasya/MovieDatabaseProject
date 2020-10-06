@@ -1,9 +1,10 @@
 
 const http = require('http');
 const fs = require("fs");
+var express = require('express');
+var app = express();
 let path = require('path');
 
-<<<<<<< HEAD
 const mongo = require('mongodb');
 const mongoClient = mongo.MongoClient;
 
@@ -11,9 +12,6 @@ app.use(express.static('/public'));
 app.get('/', function(req,res){
     res.sendFile(__dirname + "/homePage.html");
 });
-=======
-
->>>>>>> 3f0f6b243147478b9b8745c95c5c33dcfea2bef2
 
 app.use("/js", express.static(__dirname + "/js"));
 app.use("/database", express.static(__dirname + "/database"));
