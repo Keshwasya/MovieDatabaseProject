@@ -14,6 +14,7 @@ app.get('/', function(req,res){
 });
 
 app.use("/js", express.static(__dirname + "/js"));
+app.use("/css", express.static(__dirname + "/css"));
 app.use("/database", express.static(__dirname + "/database"));
 app.use("/images", express.static(__dirname + "/images"));
 
