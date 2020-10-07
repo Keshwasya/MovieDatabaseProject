@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Sign Up</title>
+  <title>Login Page</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -10,8 +10,8 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   
   <script src='https://kit.fontawesome.com/a076d05399.js'></script><!-- adds icons for bootstrap 4 -->
-  <link href="./public/favicon-16x16.png" rel="icon">
-  <link href="database.css" rel="stylesheet"> <!--style sheet for database-->
+  <link href="/images/favicon-16x16.png" rel="icon">
+  <link href="/css/database.css" rel="stylesheet"> <!--style sheet for database-->
 </head>
 
 
@@ -19,15 +19,15 @@
 <body id="top">
 
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
-        <a class="navbar-brand" href="./homePage.html"><img src="./public/navLogo.png" alt="My Logo" id="Logo"></a>
+        <a class="navbar-brand" href="/html/homePage.html"><img src="/images/navLogo.png" alt="My Logo" id="Logo"></a>
         <ul class="navbar-nav ml-auto">
             <li class="nav-item"> 
-                <a class="nav-link" href="./login.html"> 
+                <a class="nav-link" href="/html/login.html"> 
                     <i class='fas fa-sign-in-alt' style="color: lightpink;"> </i> Login 
                 </a> 
             </li> 
             <li class="nav-item"> 
-                <a class="nav-link" href="./signUp.html"> 
+                <a class="nav-link" href="/html/signUp.html"> 
                     
                     <i class='fas fa-user-alt' style="color: lightpink;"> </i> Sign Up
                 </a> 
@@ -36,8 +36,10 @@
     </nav>
 
     <div class="container">
-        <h2><br>Login Page</h2>
-        <p>Enter your username and password to login to your account.</p>
+        <h2><br>Sign Up Page</h2>
+        <p>Enter a username and password for your new 7th Art account! You will have a basic account once you sign up.
+            To get contributor privileges you must upgrade on your user profile.  
+        </p>
         <div class="form-group">
             <label for="username">Username:</label>
             <input type="text" class="form-control" id="email" placeholder="Enter username" name="username">
@@ -45,19 +47,13 @@
         </div>
         <div class="form-group">
             <label for="pwd">Password:</label>
-            <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd"><a class="link" href="./forgotPassword.html">Forgot Password?</a></input>
-
-        </div>
-        <div class="form-group form-check">
-            <label class="form-check-label">
-            <input class="form-check-input" type="checkbox" name="remember"> Remember me
-            </label>
+            <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd">
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </div>
 
-    <footer style="text-align: center;">
-        <br><br><br><br><br><br><br><br><br><br><br><br>
+    <footer >
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
         &copy;Kesh 2020
     </footer>
 </body>

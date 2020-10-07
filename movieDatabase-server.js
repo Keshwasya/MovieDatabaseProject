@@ -10,11 +10,15 @@ const mongoClient = mongo.MongoClient;
 
 app.use(express.static('/public'));
 app.get('/', function(req,res){
+    res.sendFile(__dirname + "/html/homePage.html");
+});
+app.get('/homePage.html', function(req,res){
     res.sendFile(__dirname + "/homePage.html");
 });
 
 app.use("/js", express.static(__dirname + "/js"));
 app.use("/css", express.static(__dirname + "/css"));
+app.use("/html", express.static(__dirname + "/html"));
 app.use("/database", express.static(__dirname + "/database"));
 app.use("/images", express.static(__dirname + "/images"));
 
@@ -153,12 +157,6 @@ const server = http.createServer(function (request, response) {
 					response.end("Error reading file.");
 					return;
 				}
-<<<<<<< HEAD
-				response.statusCode = 200;
-				//response.setHeader("Content-Type", "image/jpeg");
-				fs.createReadStream(filepath).pipe(response);
-				response.end(data);
-=======
 				if(path.extname(request.url) == ".jpg"){
 					response.writeHead(200, {'content-type': 'image/jpg'});
 				}else{
@@ -168,7 +166,6 @@ const server = http.createServer(function (request, response) {
 				response.write(data);
 				response.end();
 				
->>>>>>> 3f0f6b243147478b9b8745c95c5c33dcfea2bef2
 			});
 		}else{
 			response.statusCode = 404;
