@@ -22,3 +22,10 @@ cd MovieDatabaseProject
 npm install
 npm start
 ~~~
+
+## Behaviour
+As of right now, the project uses web technologies such as Express, MongoDB, and jQuery. Further full-featured implementations will be provided later.
+
+As or right now, the main homePage.html has dynamic movie loading using Javascript that loads the JSON database file. This adds the movie's poster to the page, and will later on link to the individual movie pages.
+
+All required custom Javascript and CSS files are served statically by the Express server.

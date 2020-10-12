@@ -22,6 +22,40 @@ app.use("/html", express.static(__dirname + "/html"));
 app.use("/database", express.static(__dirname + "/database"));
 app.use("/images", express.static(__dirname + "/images"));
 
+
+//Search movie database logic 
+
+let movies = [];
+fs.readFile('./public/database/movie-data-short.json', (err, data) => {
+    if (err) throw err;
+    movies = JSON.parse(data);
+    //console.log(movies); //prints all the movies from json file
+});
+
+app.get('/movie', (request, response) => {
+	if(request.query.chars){
+		console.log("searching for: " + request.query.chars);
+		let result = { movies: [] };
+		for(let i = 0; i < movies.length; i++){
+			if(movies[i].Title.toLowerCase().startsWith(request.query.chars.toLowerCase())){
+				result.movies.push(movies[i]);
+			}
+		}
+		response.writeHead(200, { "Content-Type": "text/html"})
+		response.end(JSON.stringify(result));
+	}else{
+		let result = { movies: [] };
+		for(let i = 0; i < movies.length; i++){
+			result.movies.push(movies[i]);
+		}
+		console.log("getting all");
+		response.writeHead(200, { "Content-Type": "text/html"})
+		response.end(JSON.stringify(result));
+	}
+	
+});
+
+
 app.listen(3000);
 
 /*let mimeLookup = {
