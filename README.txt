@@ -28,4 +28,8 @@ As of right now, the project uses web technologies such as Express, MongoDB, and
 
 As or right now, the main homePage.html has dynamic movie loading using Javascript that loads the JSON database file. This adds the movie's poster to the page, and will later on link to the individual movie pages.
 
+<<<<<<< HEAD
 All required custom Javascript and CSS files are served statically by the Express server.
+=======
+All required custom Javascript and CSS files are served statically by the Express server.
+>>>>>>> e8b7412e00bc5163f74019f6c1d6ce9c5b272e8c
