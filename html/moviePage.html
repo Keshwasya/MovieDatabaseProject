@@ -5,11 +5,6 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  
-  <script src='https://kit.fontawesome.com/a076d05399.js'></script><!-- adds icons for bootstrap 4 -->
   <link href="/images/favicon-16x16.png" rel="icon">
   <link href="/css/database.css" rel="stylesheet"> <!--style sheet for database-->
   <style>
@@ -47,28 +42,28 @@
     </nav>
 
     <div class="container">
-        <h1><br>Movie Page: Movie name here</h1>
+        <h1 id="title"><br>Movie Page: Movie name here</h1>
         <br>
         <div class="row">
             <br><br><br><br>
             <div class="col-sm" >
                 <div class="inline">
                     <h6>Poster:</h6>
-                    <div class="userImg">Fake Image</div>
+                    <div class="userImg"><img id="poster" src=""></div>
                     <br>
-                    <p>Release:</p>
-                    <p>Rating(max 10):</p>
-                    <p>Run Time:</p>
-                    <p>Genre:</p>
-                    <p>Director:</p>
-                    <p>Writer:</p>
-                    <p>Actors:</p>
+                    <p>Release Year: <span id="release"></span></p>
+                    <p>Rating: <span id="rating"></span></p>
+                    <p>Run Time: <span id="time"></span></p>
+                    <p>Genre: <span id="genre"></span></p>
+                    <p>Director: <span id="director"></span></p>
+                    <p>Writers: <span id="writers"></span></p>
+                    <p>Actors: <span id="actors"></span></p>
                 </div>
             </div>
             <div class="col">
                 <br>
                 <p>Summary:</p>
-                <p>Goes here</p>
+                <p id="summary">Goes here</p>
             </div>
             <div class="col" >
                 
@@ -86,6 +81,13 @@
     </div>
 
     <footer style="text-align: center;">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="/js/movie.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  
+  <script src='https://kit.fontawesome.com/a076d05399.js'></script><!-- adds icons for bootstrap 4 -->
+        
         <br><br><br><br><br><br><br><br>
         <a href="#top"><br><br><br><br>Top Of Page</a>
         &copy;Kesh 2020
