@@ -8,8 +8,7 @@ $.getJSON('/database/movie-data-short.json', function(data) {
     let rowCount = 0;
     
     $.each(data, function(i, movie) { //Loop through movie database
-        let strippedTitle = movie.Title;
-        console.log("Stripped: " + strippedTitle);
+        let strippedTitle = movie.Title.replace(/\s+/g, '');
         
         if (requestedMovieStripped === strippedTitle) {
             $("#title").text(movie.Title);
