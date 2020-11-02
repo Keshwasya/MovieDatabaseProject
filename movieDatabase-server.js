@@ -4,17 +4,22 @@ const fs = require("fs");
 var express = require('express');
 var app = express();
 let path = require('path');
+const searchDatabase = require("./search-server.js"); //connects the search-server route
+const signUp = require("./signUp-server.js"); //connects the signUp-server route
+
 
 const mongo = require('mongodb');
 const mongoClient = mongo.MongoClient;
+
 
 app.use(express.static('/public'));
 app.get('/', function(req,res){
     res.sendFile(__dirname + "/html/homePage.html");
 });
 app.get('/homePage.html', function(req,res){
-    res.sendFile(__dirname + "/homePage.html");
+    res.sendFile(__dirname + "/html/homePage.html");
 });
+
 
 app.use("/js", express.static(__dirname + "/js"));
 app.use("/css", express.static(__dirname + "/css"));
@@ -23,37 +28,12 @@ app.use("/database", express.static(__dirname + "/database"));
 app.use("/images", express.static(__dirname + "/images"));
 
 
-//Search movie database logic 
 
-let movies = [];
-fs.readFile('./public/database/movie-data-short.json', (err, data) => {
-    if (err) throw err;
-    movies = JSON.parse(data);
-    //console.log(movies); //prints all the movies from json file
-});
+app.get('/movie', searchDatabase.searchMovies);
+app.post('/addUser', signUp.addUsers);
 
-app.get('/movie', (request, response) => {
-	if(request.query.chars){
-		console.log("searching for: " + request.query.chars);
-		let result = { movies: [] };
-		for(let i = 0; i < movies.length; i++){
-			if(movies[i].Title.toLowerCase().startsWith(request.query.chars.toLowerCase())){
-				result.movies.push(movies[i]);
-			}
-		}
-		response.writeHead(200, { "Content-Type": "text/html"})
-		response.end(JSON.stringify(result));
-	}else{
-		let result = { movies: [] };
-		for(let i = 0; i < movies.length; i++){
-			result.movies.push(movies[i]);
-		}
-		console.log("getting all");
-		response.writeHead(200, { "Content-Type": "text/html"})
-		response.end(JSON.stringify(result));
-	}
-	
-});
+
+
 
 
 app.listen(3000);

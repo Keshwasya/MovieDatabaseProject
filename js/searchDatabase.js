@@ -9,6 +9,7 @@ function init(){ //displays all movies in database when page loads
             let column;
             let link;
             let image;
+            let strippedTitle;
 
             if (rowCount < 3) {
                 row = $(".container-fluid .row").last();
@@ -20,9 +21,12 @@ function init(){ //displays all movies in database when page loads
                 rowCount = 0;
             }
 
+        
             column = jQuery("<div>").addClass("col-sm").appendTo(row);
+            strippedTitle = movie.Title;
+            strippedTitle = strippedTitle.replace(/\s+/g, '');  
             link = $("<a>", {
-                href: ""
+                href: "/html/moviePage.html?movie=" + strippedTitle
             }).appendTo(column);
             image = $("<img />", {
                 src: movie.Poster,
@@ -59,6 +63,7 @@ function getMovies(){
                 let column;
                 let link;
                 let image;
+                let strippedTitle;
 
                 if (rowCount < 3) {
                     row = $(".container-fluid .row").last();
@@ -72,8 +77,10 @@ function getMovies(){
                 }
 
                 column = jQuery("<div>").addClass("col-sm").appendTo(row);
+                strippedTitle = result.movies[x].Title;
+                strippedTitle = strippedTitle.replace(/\s+/g, '');  //Removes spaces
                 link = $("<a>", {
-                    href: ""
+                    href: "/html/moviePage.html?movie=" + strippedTitle
                 }).appendTo(column);
                 image = $("<img />", {
                     src: result.movies[x].Poster,

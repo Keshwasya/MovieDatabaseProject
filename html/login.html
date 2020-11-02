@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Sign Up</title>
+  <title>Login Page</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -12,6 +12,15 @@
   <script src='https://kit.fontawesome.com/a076d05399.js'></script><!-- adds icons for bootstrap 4 -->
   <link href="/images/favicon-16x16.png" rel="icon">
   <link href="/css/database.css" rel="stylesheet"> <!--style sheet for database-->
+  <style>
+
+    html footer { 
+        align-content: center;
+        align-items: center;
+        align-self: center;
+        text-align: center;
+    }
+  </style>
 </head>
 
 
@@ -39,7 +48,7 @@
         <h2><br>Login Page</h2>
         <p>Enter your username and password to login to your account.</p>
         <div class="form-group">
-            <label for="username">Username:</label>
+            <label for="username" style="text-align: left;">Username:</label>
             <input type="text" class="form-control" id="email" placeholder="Enter username" name="username">
             <div class="invalid-feedback">Oops, you missed this one.</div>
         </div>
@@ -56,9 +65,12 @@
         <button type="submit" class="btn btn-primary">Submit</button>
     </div>
 
-    <footer style="text-align: center;">
-        <br><br><br><br><br><br><br><br><br><br><br><br>
-        &copy;Kesh 2020
+    <footer>
+        <div class="bottom-bar">
+            <br><br><br><br><br><br><br><br><br><br><br>
+            <a href="#top"><i class="fa fa-arrow-up" aria-hidden=true></i></a>
+            <p>&copy;Kesh + Dan 2020</p>
+        </div>
     </footer>
 </body>
 </html>
