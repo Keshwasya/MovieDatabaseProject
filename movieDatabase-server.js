@@ -4,8 +4,9 @@ const fs = require("fs");
 var express = require('express');
 var app = express();
 let path = require('path');
-const searchDatabase = require("./search-server.js"); //connects the search-server route
-const signUp = require("./signUp-server.js"); //connects the signUp-server route
+
+let addUserRouter = require("./signUp-router.js"); //connects the signUp-server router
+let searchDatabaseRouter = require("./search-router.js"); //connects the search-route
 
 
 const mongo = require('mongodb');
@@ -28,9 +29,11 @@ app.use("/database", express.static(__dirname + "/database"));
 app.use("/images", express.static(__dirname + "/images"));
 
 
+app.use("/addUser", addUserRouter);
+app.use('/movies', searchDatabaseRouter);
 
-app.get('/movie', searchDatabase.searchMovies);
-app.post('/addUser', signUp.addUsers);
+//app.get('/movie', searchDatabase.searchMovies);
+//app.post('/addUser', signUp.addUsers);
 
 
 

@@ -94,7 +94,7 @@ function getMovies(){
     //Making a GET request to a server on the local computer
     //The resource requests is /movie
     //A query string is included specifying the search query
-    req.open("GET", `http://localhost:3000/movie?chars=${box.value}`);
+    req.open("GET", `http://localhost:3000/movies?chars=${box.value}`);
     req.send();
 }
 
