@@ -98,6 +98,71 @@ function getMovies(){
     req.send();
 }
 
+function getGenre(genre){
+
+    $("#moviePosters").empty(); //clears old posters
+    $("#noMatch").empty(); //clears old no match message if it exists
+
+    req = new XMLHttpRequest();
+    req.onreadystatechange = function() {
+        if(this.readyState==4 && this.status==200){
+            let result = JSON.parse(this.responseText);
+            if(result.movies){
+                console.log("exits test");
+                
+                let rowCount = 0;
+
+
+                for(let x=0;x<result.movies.length;x++){
+                    console.log(result.movies[x]);
+    
+                    let row;
+                    let column;
+                    let link;
+                    let image;
+                    let strippedTitle;
+    
+                    if (rowCount < 3) {
+                        row = $(".container-fluid .row").last();
+    
+                        rowCount++;
+                    } else {
+                        row = jQuery("<div>").addClass("row").appendTo();
+                        row = $(".container-fluid .row").last();
+    
+                        rowCount = 0;
+                    }
+    
+                    column = jQuery("<div>").addClass("col-sm").appendTo(row);
+                    strippedTitle = result.movies[x].Title;
+                    strippedTitle = strippedTitle.replace(/\s+/g, '');  //Removes spaces
+                    link = $("<a>", {
+                        href: "/html/moviePage.html?movie=" + strippedTitle
+                    }).appendTo(column);
+                    image = $("<img />", {
+                        src: result.movies[x].Poster,
+                        alt: result.movies[x].Title,
+                        id: result.movies[x].Title
+                    }).appendTo(link);
+                } 
+            }else{
+                //console.log("dosn't exits");
+
+                let div = document.getElementById("moviePosters");
+                div.innerHTML = "";  
+                let text = '<h5 style="text-align: center;">Sorry no matches for this genre.  ¯\\_(ツ)_/¯<br><br><br><br><br><br></h5>';
+                document.getElementById("noMatch").innerHTML = text;
+            }
+                 
+            
+
+                       
+        }
+     }
+    req.open("GET", `http://localhost:3000/movies/genre/${genre}`);
+    req.send();
+}
+
 
 
 

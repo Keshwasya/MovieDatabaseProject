@@ -5,8 +5,8 @@ var express = require('express');
 var app = express();
 let path = require('path');
 
-let addUserRouter = require("./signUp-router.js"); //connects the signUp-server router
-let searchDatabaseRouter = require("./search-router.js"); //connects the search-route
+let addUserRouter = require("./signUp-router.js"); //connects the signUp-router
+let searchDatabaseRouter = require("./search-router.js"); //connects the search-router
 
 
 const mongo = require('mongodb');

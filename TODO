@@ -5,6 +5,7 @@ get/people/person
 get/user/user
 
 Kesh
-get/movies
-get/movies/movie
-post/movies
+implement sessions
+get/movies -> DONE
+get/movies/movie  ->DONE
+post/movies ->  implement with database
