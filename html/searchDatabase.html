@@ -45,14 +45,15 @@
     <!-- navBar -->
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
         <a class="navbar-brand" href="/html/homePage.html"><img src="/images/navLogo.png" alt="My Logo" id="Logo"></a> 
-       
-        
+               
+        <a class="btn btn-outline-light" style="margin-right: 1ch;"href="/html/addMovie.html">Add Movies</a>
         <div class="dropdown">
             <button class="btn btn-outline-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown">
                 Genres
             </button>
             <div class="dropdown-menu columnSize">
                 <div class="rowSize">
+                    <a class="dropdown-item" onclick="getGenre('All')">All</a>
                     <a class="dropdown-item" onclick="getGenre('Animation')">Animation</a>
                     <a class="dropdown-item" onclick="getGenre('Adventure')">Adventure</a>
                     <a class="dropdown-item" onclick="getGenre('Comedy')">Comedy</a>
@@ -61,6 +62,7 @@
                 <div class="rowSize">
                     <a class="dropdown-item" onclick="getGenre('Family')">Family</a>
                     <a class="dropdown-item" onclick="getGenre('Fantasy')">Fantasy</a>
+                    <a class="dropdown-item" onclick="getGenre('Musical')">Musical</a>
                     <a class="dropdown-item" onclick="getGenre('Romance')">Romance</a>
                     <a class="dropdown-item" onclick="getGenre('Crime')">Crime</a>
                 </div>
@@ -68,6 +70,7 @@
                     <a class="dropdown-item" onclick="getGenre('Drama')">Drama</a>
                     <a class="dropdown-item" onclick="getGenre('Horror')">Horror</a>
                     <a class="dropdown-item" onclick="getGenre('Western')">Western</a>
+                    <a class="dropdown-item" onclick="getGenre('Mystery')">Mystery</a>
                     <a class="dropdown-item" onclick="getGenre('Action')">Action</a>
                 </div>
             </div>

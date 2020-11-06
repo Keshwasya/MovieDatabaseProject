@@ -49,7 +49,31 @@
             <label for="pwd">Password:</label>
             <input type="password" class="form-control" id="password" placeholder="Enter password" name="pswd">
         </div>
-        <button type="submit" id="submitBtn" onclick="createUser()" class="btn btn-primary">Submit</button>
+        <button type="submit" id="submitBtn" onclick="createUser()" data-toggle="modal" data-target="#popUp" class="btn btn-outline-primary">Submit</button>
+
+        <!-- pop up -->
+        <div class="modal" id="popUp">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                
+                    <div class="modal-header" style="background-color: black;">
+                        <h4 class="modal-title">Sign Up</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    
+                    <div class="modal-body" style="background-color: black;">Account Created!!!</div>
+                
+                    <div class="modal-footer" style="background-color: black;">
+                        <button type="submit" class="btn btn-outline-danger" data-dismiss="modal" id="submit">Close</button>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+
+
+
+
     </div>
 
     <footer style="text-align: center;">

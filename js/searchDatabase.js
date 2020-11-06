@@ -1,9 +1,8 @@
 'use strict';
 
 function init(){ //displays all movies in database when page loads  
-    $.getJSON('/database/movie-data-short.json', function(data) { 
+    $.getJSON("/js/movie-data-short.json", function(data) { 
         let rowCount = 0;
-        
         $.each(data, function(i, movie) { //Loop through movie database
             let row;
             let column;
@@ -30,7 +29,7 @@ function init(){ //displays all movies in database when page loads
             }).appendTo(column);
             image = $("<img />", {
                 src: movie.Poster,
-                alt: movie.Title
+                alt: movie.Title,
             }).appendTo(link);
         });
     });
@@ -94,7 +93,8 @@ function getMovies(){
     //Making a GET request to a server on the local computer
     //The resource requests is /movie
     //A query string is included specifying the search query
-    req.open("GET", `http://localhost:3000/movies?chars=${box.value}`);
+    //req.open("GET", `http://localhost:3000/movies?chars=${box.value}`);
+    req.open("GET", `http://localhost:3000/movies/search?chars=${box.value}`);
     req.send();
 }
 
@@ -107,11 +107,8 @@ function getGenre(genre){
     req.onreadystatechange = function() {
         if(this.readyState==4 && this.status==200){
             let result = JSON.parse(this.responseText);
-            if(result.movies){
-                console.log("exits test");
-                
+            if(result.movies){  //if there are movies in that genre
                 let rowCount = 0;
-
 
                 for(let x=0;x<result.movies.length;x++){
                     console.log(result.movies[x]);
@@ -145,9 +142,7 @@ function getGenre(genre){
                         id: result.movies[x].Title
                     }).appendTo(link);
                 } 
-            }else{
-                //console.log("dosn't exits");
-
+            }else{ //if no movies in this genre
                 let div = document.getElementById("moviePosters");
                 div.innerHTML = "";  
                 let text = '<h5 style="text-align: center;">Sorry no matches for this genre.  ¯\\_(ツ)_/¯<br><br><br><br><br><br></h5>';

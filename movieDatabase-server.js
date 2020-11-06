@@ -35,10 +35,6 @@ app.use('/movies', searchDatabaseRouter);
 //app.get('/movie', searchDatabase.searchMovies);
 //app.post('/addUser', signUp.addUsers);
 
-
-
-
-
 app.listen(3000);
 
 /*let mimeLookup = {

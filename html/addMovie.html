@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Add Movie</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  
+  <script src='https://kit.fontawesome.com/a076d05399.js'></script><!-- adds icons for bootstrap 4 -->
+  <link href="/images/favicon-16x16.png" rel="icon">
+  <link href="/css/database.css" rel="stylesheet"> <!--style sheet for database-->
+  <style>
+
+    html footer { 
+        align-content: center;
+        align-items: center;
+        align-self: center;
+        text-align: center;
+    }
+  </style>
+</head>
+
+
+
+<body id="top">
+
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <a class="navbar-brand" href="/html/homePage.html"><img src="/images/navLogo.png" alt="My Logo" id="Logo"></a>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item"> 
+                <a class="nav-link" href="/html/login.html"> 
+                    <i class='fas fa-sign-in-alt' style="color: lightpink;"> </i> Login 
+                </a> 
+            </li> 
+            <li class="nav-item"> 
+                <a class="nav-link" href="/html/signUp.html"> 
+                    
+                    <i class='fas fa-user-alt' style="color: lightpink;"> </i> Sign Up
+                </a> 
+            </li> 
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h2><br>Add Movie Page</h2>
+        <p>Enter new movie's details.</p>
+
+        <form>
+            
+            <div class="form-group">
+                <label for="Title">Enter Title:</label>
+                <input type="text" class="form-control" id="Title" placeholder="(ex.Toy Story)">
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label for="Year">Enter Release Year:</label>
+                    <input type="number" class="form-control" id="Year" max="2021" min="1880" placeholder="(ex.1999)">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="Rated">Enter Movie Rating:</label>
+                    <input type="text" class="form-control" id="Rated" placeholder="(ex.PG)">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="imdbRating">Enter Rating:</label>
+                    <input type="number" class="form-control" id="imdbRating" step=".1" min="0" max="10" placeholder="(ex.8.3)">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="Runtime">Enter Runtime (in minutes):</label>
+                    <input type="number" class="form-control" min="0" max="300"id="Runtime" placeholder="(ex.81)">
+                </div>
+            </div>
+            
+            
+            <div class="form-group">
+                <label for="Poster">Enter Poster URL:</label>
+                <input type="text" class="form-control" id="Poster" placeholder="(ex.https://example.com)">
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="Director">Enter Director(s):</label>
+                    <input type="text" class="form-control" id="Director" placeholder="(ex.David Fincher)">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="Actors">Enter Actors:</label>
+                    <input type="text" class="form-control" id="Actors" placeholder="(ex.Tom Hanks, Don Rickles... )">
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="Language">Enter Language:</label>
+                    <input type="text" class="form-control" id="Language" placeholder="(ex.English)">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Writer">Enter Writer(s):</label>
+                <input type="text" class="form-control" id="Writer" placeholder="(John Lasseter (original story by), Pete Docter (original story by), Andrew Stanton (screenplay by) ... )">
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="Genre">Enter Genres:</label>
+                <input type="text" class="form-control" id="Genre" placeholder="(ex.Animation, Adventure...)">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="DVD">Enter DVD Release Date:</label>
+                    <input class="form-control" type="date" value="2011-08-19" id="DVD">
+                    <!-- <input type="text" class="form-control" id="DVD" placeholder="(ex.20 Mar 2001)"> -->
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="Country">Enter Country:</label>
+                    <input type="text" class="form-control" id="Country" placeholder="(ex.USA)">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Plot">Enter Plot:</label>
+                <textarea class="form-control" id="Plot" placeholder="Plot" rows="3"></textarea>
+              </div>
+            <!-- <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#popUp">Submit</button> -->
+            <button type="submit" class="btn btn-outline-primary" id="submit">Submit</button>
+        </form>
+
+        <!-- pop up
+        <div class="modal" id="popUp">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                
+                    <div class="modal-header" style="background-color: black;">
+                        <h4 class="modal-title">Add Movie</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    
+                    <div class="modal-body" style="background-color: black;">Movie Added</div>
+                
+                    <div class="modal-footer" style="background-color: black;">
+                        <button type="submit" class="btn btn-outline-danger" data-dismiss="modal" id="submit">Close</button>
+                    </div>
+                    
+                </div>
+            </div>
+        </div> -->
+
+    </div>
+
+    <footer>
+        <div class="bottom-bar">
+            <br>
+            <a href="#top"><i class="fa fa-arrow-up" aria-hidden=true></i></a>
+            <p>&copy;Kesh + Dan 2020</p>
+        </div>
+        <script src="/js/addMovie.js"></script>
+    </footer>
+</body>
+</html>

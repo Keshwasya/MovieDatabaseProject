@@ -1,6 +1,6 @@
 'use strict';
 
-$.getJSON('/database/movie-data-short.json', function(data) { 
+$.getJSON('/js/movie-data-short.json', function(data) { 
     let rowCount = 0;
     
     $.each(data, function(i, movie) { //Loop through movie database
