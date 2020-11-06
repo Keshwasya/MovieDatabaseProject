@@ -9,29 +9,46 @@ router.nextUserID = config.nextUserID; //keeps track of the users id so we can g
 //post addUser route 
 router.post("/", addUsers);
 
+let users = [];
+let usersNum = [];
+fs.readFile('./users/users.json', (err, data) => {
+    if (err) throw err;
+    users = JSON.parse(data); // reads the json file and stores data into users object array
+    
+});
+fs.readFile('./users/usersNum.json', (err, data) => {
+    if (err) throw err;
+    usersNum = JSON.parse(data); // reads the json file and stores data into users object array
+    
+});
+
 
 //adding new users
 function addUsers(request, response){ // the js files send a post request at the URL addUser
 	//create an empty user account
-	let user = {username: "", password: "" , id: router.nextUserID ,profilePic: "", member : false, followUser: {}, peopleFollow: {}, movies: {}};
+	usersNum++;
+	let user = {username: "", password: "" , id: usersNum ,profilePic: "", member : false, followUser: {}, peopleFollow: {}, movies: {}};
 	router.nextUserID++; //keeps track of user id
 	user.username = request.query.user; //fills in the new users username and password
 	user.password  = request.query.pass;
 
-	//console.log(user);
-
-	//creates a user jason object file
-	fs.writeFile("./users/" + user.id + "-" + user.username + ".json",JSON.stringify(user) ,function(err){
-			if(err){
-				console.log("Error creating user");
-				console.log("err: " + err);
-				response.status(500).send("You probsbely didn't write the file right");
-			}
-			response.json(user);
-			console.log("user created");
-			
+	// Update id
+	let writeStreamNum = fs.createWriteStream("./users/usersNum.json");
+	writeStreamNum.write("["+ usersNum +"]");
+	writeStreamNum.on('finish', () => {
+		console.log('ID Updated');
 	});
-	
+	writeStreamNum.end();// close the stream
+
+	//Add new user to users collection
+	users.push(user);
+	let writeStream = fs.createWriteStream("./users/users.json");
+	writeStream.write(JSON.stringify(users));// write user to file
+	writeStream.on('finish', () => {
+		console.log('User Added');
+	});
+	writeStream.end();// close the stream
+
 }
 
 //module.exports = {addUsers};

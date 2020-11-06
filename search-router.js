@@ -24,6 +24,8 @@ fs.readFile('./js/movie-data-short.json', (err, data) => {
 });
 
 function addMovie(request, response){
+	//!!!!*******VALIDATE ALL  THE PERAMETERS******!!!!// in the addMovies js file
+
 	if(!request.query.Poster){
 		//request.query.Poster  = "/images/no-poster.jpg";
 	}
