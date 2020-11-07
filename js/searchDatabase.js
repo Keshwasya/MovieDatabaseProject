@@ -89,7 +89,7 @@ function getMovies(){
             }            
         }
     }
-
+    
     //Making a GET request to a server on the local computer
     //The resource requests is /movie
     //A query string is included specifying the search query
@@ -153,7 +153,7 @@ function getGenre(genre){
 
                        
         }
-     }
+    }
     req.open("GET", `http://localhost:3000/movies/genre/${genre}`);
     req.send();
 }

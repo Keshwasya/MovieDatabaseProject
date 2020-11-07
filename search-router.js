@@ -8,6 +8,7 @@ router.get("/genre/:genre", getGenre); //genre button
 
 router.get("/title/:title", getTitle);
 router.get("/year/:year", getYear);
+// router.use("/", auth);
 
 //Rest API
 router.get("/", filterMovies);
@@ -23,9 +24,10 @@ fs.readFile('./js/movie-data-short.json', (err, data) => {
     //console.log(movies); //prints all the movies from json file
 });
 
+
+
 function addMovie(request, response){
 	//!!!!*******VALIDATE ALL  THE PERAMETERS******!!!!// in the addMovies js file
-
 	if(!request.query.Poster){
 		//request.query.Poster  = "/images/no-poster.jpg";
 	}
@@ -160,6 +162,8 @@ function getGenre(request, response){
 
 
 function searchMovies(request, response){ // the js files send a get request called /movie... this is how the server handles it 
+	//request.session.loggedin = true;
+	//console.log(request.session);
 	if(request.query.chars){ //the search input
 		console.log("searching for: " + request.query.chars);
 		let result = { movies: [] }; 

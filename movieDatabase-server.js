@@ -1,13 +1,14 @@
-
+'use strict';
 const http = require('http');
 const fs = require("fs");
 var express = require('express');
 var app = express();
 let path = require('path');
+const session = require('express-session')
 
 let addUserRouter = require("./signUp-router.js"); //connects the signUp-router
 let searchDatabaseRouter = require("./search-router.js"); //connects the search-router
-
+//let loginRouter = require("./login-router.js"); //connects the search-router
 
 const mongo = require('mongodb');
 const mongoClient = mongo.MongoClient;
@@ -21,16 +22,62 @@ app.get('/homePage.html', function(req,res){
     res.sendFile(__dirname + "/html/homePage.html");
 });
 
+app.use(session({ secret: 'some secret here'}))
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+
+
+// app.use(session({
+//     secret: 'some secret here',
+//     proxy: true,
+//     resave: true,
+//     saveUninitialized: true
+// }));
+
+app.use("/", auth);
 
 app.use("/js", express.static(__dirname + "/js"));
 app.use("/css", express.static(__dirname + "/css"));
-app.use("/html", express.static(__dirname + "/html"));
+app.use("/html",auth, express.static(__dirname + "/html"));
 app.use("/database", express.static(__dirname + "/database"));
 app.use("/images", express.static(__dirname + "/images"));
 
 
 app.use("/addUser", addUserRouter);
 app.use('/movies', searchDatabaseRouter);
+
+function auth(request, response, next){
+	//console.log("authetication");
+	if(request.session.loggedin){
+		//console.log(request.session);
+	}else{
+		//console.log("Not logged in");
+	}
+	
+	next();
+}
+
+app.post("/login", function login(request, response, next){ 
+	request.session.loggedin = true;
+	request.session.username = request.query.user;
+	//console.log(request.session);
+	response.send(request.session);
+	//request.redirect("http://127.0.0.1:3000/");
+	//response.redirect(301,"http://127.0.0.1:3000/");
+	//next();
+	
+});
+
+app.get("/login", function login(request, response, next){ 
+
+	//console.log(request.session);
+	//request.redirect("http://127.0.0.1:3000/");
+	//response.redirect(301,"http://127.0.0.1:3000/");
+	//next();
+	
+});
+
+//app.use("/login", loginRouter);
 
 //app.get('/movie', searchDatabase.searchMovies);
 //app.post('/addUser', signUp.addUsers);

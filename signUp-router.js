@@ -1,10 +1,6 @@
 var express = require('express');
 let router = express.Router();
 const fs = require("fs");
-const config = require("./config.json");
-//var app = express();
-
-router.nextUserID = config.nextUserID; //keeps track of the users id so we can give unique id's to new users
 
 //post addUser route 
 router.post("/", addUsers);
@@ -25,10 +21,13 @@ fs.readFile('./users/usersNum.json', (err, data) => {
 
 //adding new users
 function addUsers(request, response){ // the js files send a post request at the URL addUser
+
+	//request.session.loggedin = true;
+	//console.log(request.session);
+
 	//create an empty user account
 	usersNum++;
 	let user = {username: "", password: "" , id: usersNum ,profilePic: "", member : false, followUser: {}, peopleFollow: {}, movies: {}};
-	router.nextUserID++; //keeps track of user id
 	user.username = request.query.user; //fills in the new users username and password
 	user.password  = request.query.pass;
 
