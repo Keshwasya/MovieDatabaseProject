@@ -6,6 +6,7 @@ const fs = require("fs");
 router.get("/search", searchMovies); //search bar
 router.get("/genre/:genre", getGenre); //genre button
 
+
 router.get("/title/:title", getTitle);
 router.get("/year/:year", getYear);
 // router.use("/", auth);
@@ -14,6 +15,7 @@ router.get("/year/:year", getYear);
 router.get("/", filterMovies);
 router.get("/:movie", getMovie); //based on the movies id
 router.post("/", addMovie);
+
 
 
 let movies = [];
@@ -183,6 +185,12 @@ function searchMovies(request, response){ // the js files send a get request cal
 		response.end(JSON.stringify(result));
 	}
 	
+}
+
+function auth(request,response,next){
+	//console.log(request.session);
+	response.send(JSON.stringify(request.session));
+	next();
 }
 
 function getTitle(request, response){

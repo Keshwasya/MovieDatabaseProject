@@ -11,4 +11,6 @@ function login(){
     //console.log(password.value);
     req.open("POST", `http://localhost:3000/login?user=${username.value}&pass=${password.value}`);
     req.send();
+    
+
 }
