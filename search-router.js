@@ -29,7 +29,7 @@ fs.readFile('./js/movie-data-short.json', (err, data) => {
 
 
 function addMovie(request, response){
-	if(request.session.loggedin){	//can only add movies if you have permissions  
+	if(request.session.loggedin == true ){	//can only add movies if you have permissions  
 
 		//!!!!*******VALIDATE ALL  THE PERAMETERS******!!!!// in the addMovies js file
 		if(!request.query.Poster){
@@ -51,7 +51,7 @@ function addMovie(request, response){
 		// close the stream
 		writeStream.end();
 	}else{
-		console.log("Can't add movie to databse becuase not logged in.");
+		console.log("Not authorized. Can't add movie to databse if not signed in");
 	}
 
 }

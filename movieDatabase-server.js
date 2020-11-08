@@ -39,7 +39,7 @@ app.use(session({
 
 app.use("/js", express.static(__dirname + "/js"));
 app.use("/css", express.static(__dirname + "/css"));
-app.use("/html",auth, express.static(__dirname + "/html"));
+app.use("/html", express.static(__dirname + "/html"));
 app.use("/database", express.static(__dirname + "/database"));
 app.use("/images", express.static(__dirname + "/images"));
 

@@ -23,6 +23,19 @@ console.log(decodedCookie);
 // }
 // console.log(getCookie("connect.sid"))
 
+let req =null;
+let logOut = document.getElementById("logOut");
+logOut.onclick = logout;
+
+function logout(){
+    req = new XMLHttpRequest();
+    //console.log(username.value);
+    //console.log(password.value);
+    req.open("GET",`http://localhost:3000/login`);
+    req.send();
+    
+}
+
 $.getJSON('/js/movie-data-short.json', function(data) { 
     let rowCount = 0;
     
