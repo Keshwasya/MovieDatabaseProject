@@ -32,6 +32,9 @@ function login(request, response, next){
 			break;
 		}
 	}
+	if(request.session.loggedin == false){
+		console.log("Wrong username or password");
+	}
 	
 	next();
 	
