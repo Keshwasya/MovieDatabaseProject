@@ -31,7 +31,8 @@ app.use(session({
 	proxy: true,
     resave: true,
 	saveUninitialized: true,
-	cookie: {httpOnly:false}
+	name:"UserDataCookie",
+	cookie: {httpOnly:false , loggedin:false, username:"", password:""} //defult cookie values
 }));
 
 //app.use("/", auth);
@@ -51,6 +52,7 @@ function auth(request, response, next){
 	if(request.session.loggedin){
 		console.log(request.session);
 	}else{
+		//console.log(request.session);
 		console.log("Not logged in");
 	}
 	next();

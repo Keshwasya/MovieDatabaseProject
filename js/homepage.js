@@ -3,6 +3,7 @@
 var decodedCookie = decodeURIComponent(document.cookie);
 console.log(decodedCookie);
 
+//console.log(window);
 
 // function getCookie(name) {
 //     // Split cookie string and get all individual name=value pairs in an array

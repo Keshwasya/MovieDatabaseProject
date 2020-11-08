@@ -29,6 +29,7 @@ function addMovies(){
     req = new XMLHttpRequest();
     req.open("POST", `http://localhost:3000/movies?Title=${Title}&Year=${Year}&Rated=${Rated}&imdbRating=${imdbRating}&Runtime=${Runtime}&Poster=${Poster}&Director=${Director}&Actors=${Actors}&Language=${Language}&Writer=${Writer}&Genre=${Genre}&DVD=${DVD}&Country=${Country}&Plot=${Plot}`);
     req.send();
+    
 
     return true;
 }

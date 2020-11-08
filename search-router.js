@@ -29,25 +29,30 @@ fs.readFile('./js/movie-data-short.json', (err, data) => {
 
 
 function addMovie(request, response){
-	//!!!!*******VALIDATE ALL  THE PERAMETERS******!!!!// in the addMovies js file
-	if(!request.query.Poster){
-		//request.query.Poster  = "/images/no-poster.jpg";
+	if(request.session.loggedin){	//can only add movies if you have permissions  
+
+		//!!!!*******VALIDATE ALL  THE PERAMETERS******!!!!// in the addMovies js file
+		if(!request.query.Poster){
+			//request.query.Poster  = "/images/no-poster.jpg";
+		}
+
+		movies.push(request.query);
+
+		let writeStream = fs.createWriteStream("./js/movie-data-short.json");
+
+		// write movies
+		writeStream.write(JSON.stringify(movies));
+
+		// the finish event is emitted when all data has been flushed from the stream
+		writeStream.on('finish', () => {
+			console.log('Movie Added');
+		});
+
+		// close the stream
+		writeStream.end();
+	}else{
+		console.log("Can't add movie to databse becuase not logged in.");
 	}
-
-	movies.push(request.query);
-
-	let writeStream = fs.createWriteStream("./js/movie-data-short.json");
-
-	// write movies
-	writeStream.write(JSON.stringify(movies));
-
-	// the finish event is emitted when all data has been flushed from the stream
-	writeStream.on('finish', () => {
-		console.log('Movie Added');
-	});
-
-	// close the stream
-	writeStream.end();
 
 }
 

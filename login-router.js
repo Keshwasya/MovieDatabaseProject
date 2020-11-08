@@ -5,6 +5,7 @@ const fs = require("fs");
 
 
 router.post("/", login, (req,res,next) => {res.redirect("/html/homePage.html")});
+//router.get("/", logout); 
 //router.post("/", login); //redirects to homepage 
 
 let users = [];
@@ -16,6 +17,7 @@ fs.readFile('./users/users.json', (err, data) => {
 
 function login(request, response, next){ 
 	if(request.session.loggedin){ //Can only log in once
+		console.log("Already logged in");
 		response.status(401).send("already logged in");
 		return;
 	}
@@ -39,6 +41,18 @@ function login(request, response, next){
 	//response.redirect(301,"/html/homePage.html");
 	//next();
 	
+}
+
+function logout(request, response, next){ //logout button on homepage does not work
+	if(request.session.loggedin){ //if logged in then log cookie out
+		request.session.loggedin = false;
+		request.session.username = "";
+		request.session.password = "";
+		console.log("You have logged out");
+	}else{
+		console.log("You are not logged in")
+	}
+	next();
 }
 
 module.exports = router;
