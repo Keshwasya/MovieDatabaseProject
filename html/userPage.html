@@ -18,12 +18,19 @@
         width: 150px;
         background: #aaa;
     }
+
+    html footer { 
+        align-content: center;
+        align-items: center;
+        align-self: center;
+        text-align: center;
+    }
     </style>
 </head>
 
 
 
-<body id="top">
+<body id="top" onload="init()">
     <div class="jumbotron text-center" style="margin-bottom:0">
         <!-- <h1 style="color: black;">The 7th Art</h1> -->
         <a><img src="/images/Logo&Name.png"  alt="My Logo" id="LogoName"></a>
@@ -78,10 +85,13 @@
         
     </div>
 
-    <footer style="text-align: center;">
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-        <a href="#top"><br><br><br><br>Top Of Page</a>
-        &copy;Kesh 2020
+    <footer>
+        <div class="bottom-bar">
+            <br><br><br><br><br><br><br><br><br><br>
+            <a href="#top"><i class="fa fa-arrow-up" aria-hidden=true></i></a>
+            <p>&copy;Kesh + Dan 2020</p>
+        </div>
+        
     </footer>
     <script src="/js/userPage.js"></script>
 </body>
