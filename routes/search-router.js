@@ -52,7 +52,9 @@ function addMovie(request, response){
 		writeStream.end();
 	}else{
 		console.log("Not authorized. Can't add movie to databse if not signed in");
+		response.end("False");
 	}
+	response.end("True");
 
 }
 

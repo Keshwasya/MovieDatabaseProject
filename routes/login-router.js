@@ -1,4 +1,3 @@
-const { request } = require('express');
 var express = require('express');
 let router = express.Router();
 const fs = require("fs");
@@ -6,6 +5,8 @@ const fs = require("fs");
 
 router.post("/", login, (req,res,next) => {res.redirect("/html/homePage.html")});
 router.get("/", logout, (req,res,next) => {res.redirect("/html/homePage.html")}); 
+router.get("/check", userCheck); //sends the username to the client for dynamic navbar
+
 //router.post("/", login); //redirects to homepage 
 //router.get("/", logout); 
 
@@ -16,10 +17,16 @@ fs.readFile('./users/users.json', (err, data) => {
     
 });
 
+function userCheck(request, response){
+	let result = request.session.username;
+	response.end(JSON.stringify(result));
+}
+
 function login(request, response, next){ 
 	if(request.session.loggedin == true){ //Can only log in once
 		console.log("Already logged in");
-		response.status(401).send("already logged in");
+		//response.status(401).send("already logged in");
+		response.end("False");
 		return;
 	}
 
@@ -29,14 +36,15 @@ function login(request, response, next){
 			request.session.username = request.query.user;
 			request.session.password = request.query.pass;
 			console.log("Logged in")
+			response.end("True");
 			break;
 		}
 	}
 	if(request.session.loggedin == false){
 		console.log("Wrong username or password");
+		response.end("False");
 	}
 	
-	next();
 	
 	//request.session = Set-Cookie
 	//request.session.loggedin = true;

@@ -25,23 +25,13 @@
 
 
 
-<body id="top">
+<body id="top" onload="init()">
 
     <!-- navbar -->
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
         <a class="navbar-brand" href="/html/homePage.html"><img src="/images/navLogo.png" alt="My Logo" id="Logo"></a>
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item"> 
-                <a class="nav-link" href="/html/login.html"> 
-                    <i class='fas fa-sign-in-alt' style="color: lightpink;"> </i> Login 
-                </a> 
-            </li> 
-            <li class="nav-item"> 
-                <a class="nav-link" href="/html/signUp.html"> 
-                    
-                    <i class='fas fa-user-alt' style="color: lightpink;"> </i> Sign Up
-                </a> 
-            </li> 
+        <ul class="navbar-nav ml-auto" id="navBtns">
+            <!-- This is where the dynamic nav bar will load using ajax http request -->
         </ul>
     </nav>
 
@@ -62,7 +52,14 @@
                 </div>
                 <div class="form-group col-md-3">
                     <label for="Rated">Enter Movie Rating:</label>
-                    <input type="text" class="form-control" id="Rated" placeholder="(ex.PG)">
+                    <!-- <input type="text" class="form-control" id="Rated" placeholder="(ex.PG)"> -->
+                    <select id="Rated" class="form-control">
+                        <option selected>NR</option>
+                        <option>G</option>
+                        <option>PG</option>
+                        <option>PG-13</option>
+                        <option>R</option>
+                    </select>
                 </div>
                 <div class="form-group col-md-3">
                     <label for="imdbRating">Enter Rating:</label>

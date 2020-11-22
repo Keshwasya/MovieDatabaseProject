@@ -34,7 +34,7 @@ app.use(session({
     resave: true,
 	saveUninitialized: true,
 	name:"UserDataCookie",
-	cookie: {httpOnly:false , loggedin:false, username:"", password:""} //defult cookie values
+	cookie: {loggedin:false, username:"", password:""} //defult cookie values
 }));
 
 //app.use("/", auth);

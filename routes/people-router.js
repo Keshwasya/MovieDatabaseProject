@@ -28,7 +28,7 @@ function addPersonInformation(name, role, movieTitle, result) {
 function searchPeople(request, response) {
     let result = {personName: "", roles: [], movieTitles: []};
     //let name = decodeURIComponent(request.params.person);
-    console.log("Searching for: " + request.query);
+    //console.log("Searching for: " + request.query);
     
     //Send person param to page
     response.redirect("/html/personPage.html?personName=" + request.params.person);

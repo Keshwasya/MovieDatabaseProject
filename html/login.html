@@ -25,29 +25,19 @@
 
 
 
-<body id="top">
+<body id="top" onload="init()">
 
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
         <a class="navbar-brand" href="/html/homePage.html"><img src="/images/navLogo.png" alt="My Logo" id="Logo"></a>
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item"> 
-                <a class="nav-link" href="/html/login.html"> 
-                    <i class='fas fa-sign-in-alt' style="color: lightpink;"> </i> Login 
-                </a> 
-            </li> 
-            <li class="nav-item"> 
-                <a class="nav-link" href="/html/signUp.html"> 
-                    
-                    <i class='fas fa-user-alt' style="color: lightpink;"> </i> Sign Up
-                </a> 
-            </li> 
+        <ul class="navbar-nav ml-auto" id="navBtns">
+            <!-- This is where the dynamic nav bar will load using ajax http request -->
         </ul>
     </nav>
 
     <div class="container">
         <h2><br>Login Page</h2>
         <p>Enter your username and password to login to your account.</p>
-        <!-- <form action="/login" method="post"> -->
+        
         <div class="form-group">
             <label for="username" style="text-align: left;">Username:</label>
             <input type="text" class="form-control" id="username" placeholder="Enter username" name="username">
@@ -64,7 +54,7 @@
             </label>
         </div>
         <button type="submit" class="btn btn-outline-primary" id="submit">Submit</button>
-        <!-- </form> -->
+        
     </div>
 
     <footer>
