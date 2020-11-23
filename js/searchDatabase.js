@@ -1,10 +1,10 @@
 'use strict';
 
-let req = null;
+let req = new XMLHttpRequest();
 
-function init(){ //displays all movies in database when page loads and loads dynamic navbar
+/*function init(){ //displays all movies in database when page loads and loads dynamic navbar
     req = new XMLHttpRequest();
-    /*req.onreadystatechange = function() {
+    req.onreadystatechange = function() {
         if(this.readyState==4 && this.status==200){
             let username = this.responseText; //gets the username from server
             document.getElementById("navBtns").innerHTML = ""; //clears the navbar in case it had already been set
@@ -32,8 +32,8 @@ function init(){ //displays all movies in database when page loads and loads dyn
     }
     
     req.open("GET", `http://localhost:3000/login/check`);  //checks what the username is
-    req.send();*/
-    
+    req.send();
+}*/
     
     //displaying movies   
     $.getJSON("/js/movie-data-short.json", function(data) { 
@@ -68,7 +68,6 @@ function init(){ //displays all movies in database when page loads and loads dyn
             }).appendTo(link);
         });
     });
-}
 
 /*function logout(){
     req = new XMLHttpRequest();

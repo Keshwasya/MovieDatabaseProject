@@ -18,11 +18,14 @@ function init(){ //displays correct nav bar items based on if the user is logged
                                     ' + username +'</a>\
                                     <div class="dropdown-menu">\
                                         <a class="dropdown-item" href="/me/' + encodeURI(username) + '">User Page</a>\
-                                        <a class="dropdown-item" onclick="logout()" href="#">Log Out</a>\
+                                        <a id="logout" class="dropdown-item" onclick="logout()" href="#">Log Out</a>\
                                     </div>\
                                 </li>'; // username.replace(/['"]+/g, '') gets rid of the double quotes around the
                                 //THE HREF IN THE USER PAGE ITEM WILL LINK TO YOUR PAGE
                 document.getElementById("navBtns").innerHTML = navItems;
+                $("logout").click(function() {
+                    logout(); 
+                });
             }
             //console.log("Username: " + username); //checking if username is correctly sent from server         
         }
@@ -35,7 +38,7 @@ function init(){ //displays correct nav bar items based on if the user is logged
 
 
 function logout(){
-    request = new XMLHttprequestuest();
+    request = new XMLHttpRequest();
 
     window.location.reload(); //reloads the page and resets the navbar
     request.open("GET",`http://localhost:3000/login`);
