@@ -1,10 +1,10 @@
-let req =null;
+let request =null;
 
-/*function init(){ //displays correct nav bar items based on if the user is logged in or not  
-    req = new XMLHttpRequest();
-    req.onreadystatechange = function() {
+function init(){ //displays correct nav bar items based on if the user is logged in or not  
+    request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
         if(this.readyState==4 && this.status==200){
-            let username = this.responseText; //gets the username from server
+            let username = this.responseText.replace(/['"]+/g, '').trim(); //gets the username from server
             document.getElementById("navBtns").innerHTML = ""; //clears the navbar in case it had already been set
 
             if(username == "" || username.length == 2){ //if not logged in then these items will be added to the nav bar
@@ -15,9 +15,9 @@ let req =null;
             }else{ //if logged in then these items will be added to the nav bar
                 let navItems = '<li class="dropdown dropleft">\
                                     <a class="nav-link dropdown-toggle" style="color: lightpink;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
-                                    ' + username.replace(/['"]+/g, '') +'</a>\
+                                    ' + username +'</a>\
                                     <div class="dropdown-menu">\
-                                        <a class="dropdown-item" href="#">User Page</a>\
+                                        <a class="dropdown-item" href="/me/' + encodeURI(username) + '">User Page</a>\
                                         <a class="dropdown-item" onclick="logout()" href="#">Log Out</a>\
                                     </div>\
                                 </li>'; // username.replace(/['"]+/g, '') gets rid of the double quotes around the
@@ -28,14 +28,16 @@ let req =null;
         }
     }
     
-    req.open("GET", `http://localhost:3000/login/check`);  //checks what the username is
-    req.send();
+    request.open("GET", `http://localhost:3000/login/check`);  //checks what the username is
+    request.send();
 }
 
+
+
 function logout(){
-    req = new XMLHttpRequest();
+    request = new XMLHttprequestuest();
 
     window.location.reload(); //reloads the page and resets the navbar
-    req.open("GET",`http://localhost:3000/login`);
-    req.send();
-}*/
+    request.open("GET",`http://localhost:3000/login`);
+    request.send();
+}

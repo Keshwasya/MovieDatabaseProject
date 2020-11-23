@@ -38,7 +38,7 @@
 
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
         <a class="navbar-brand" href="/html/homePage.html"><img src="/images/navLogo.png" alt="My Logo" id="Logo"></a>
-        <ul class="navbar-nav ml-auto">
+        <!-- <ul class="navbar-nav ml-auto">
             <li class="nav-item"> 
                 <a class="nav-link" href="/html/login.html"> 
                     <i class='fas fa-sign-in-alt' style="color: lightpink;"> </i> Login 
@@ -50,36 +50,39 @@
                     <i class='fas fa-user-alt' style="color: lightpink;"> </i> Sign Up
                 </a> 
             </li> 
+        </ul> -->
+        <ul class="navbar-nav ml-auto" id="navBtns">
+            <!-- This is where the dynamic nav bar will load using ajax http request -->
         </ul>
     </nav>
 
     <div class="container">
         <br>
         
-        <h1><br>User Page</h1>
+        <h1><br><span id="username">User Page</span></h1>
         
         <br>
         <br>
-        <h6 style="float: right;">Recommended Movies:</h6>
+        <h6 style="float: right;">Recommended Movies: <span id="recommended-movies"></span></h6>
         <h6>Profile Pic:</h6>
-        <div class="userImg">Fake Image</div>
+        <img class="userImg" id="profile-image" src="">
         <br>
-        <h6>Are you a contributing Member?</h6>
+        <h6>Status</h6>
         <div class="form-check">
             <label class="form-check-label" for="check1">
-              <input type="checkbox" class="form-check-input" id="check1" value="something">Contributing Member</input>
+              <input type="checkbox" class="form-check-input" id="check1" value="something">Contributing Member
             </label>
         </div>
           
         <div class="form-check">
             <label class="form-check-label" for="check2">
-              <input type="checkbox" class="form-check-input" id="check2" name="option2" value="something">View-Only Member</input>
+              <input type="checkbox" class="form-check-input" id="check2" name="option2" value="something">View-Only Member
             </label>
         </div>
         <br><br>
-        <h6>Users you folow:</h6>
+        <h6>Users you folow: <span id="followed-users"></span></h6>
         <br><br><br><br>
-        <h6>Actors/Directors/Writers you follow:</h6>
+        <h6>Actors/Directors/Writers you follow: <span id="followed-people"></span></h6>
 
           
         
@@ -93,6 +96,7 @@
         </div>
         
     </footer>
-    <script src="/js/userPage.js"></script>
+    <script src="/js/navbar.js"></script>
+    <script src="/js/me.js"></script>
 </body>
 </html>

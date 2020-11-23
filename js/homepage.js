@@ -2,7 +2,7 @@
 
 let req =null;
 
-function init(){ //displays correct nav bar items based on if the user is logged in or not  
+/*function init(){ //displays correct nav bar items based on if the user is logged in or not  
     req = new XMLHttpRequest();
     req.onreadystatechange = function() {
         if(this.readyState==4 && this.status==200){
@@ -42,7 +42,7 @@ function logout(){
     window.location.reload(); //reloads the page and resets the navbar
     req.open("GET",`http://localhost:3000/login`);
     req.send();
-}
+}*/
 
 $.getJSON('/js/movie-data-short.json', function(data) { 
     let rowCount = 0;
@@ -66,8 +66,8 @@ $.getJSON('/js/movie-data-short.json', function(data) {
             }
     
             column = jQuery("<div>").addClass("col-sm").appendTo(row);
-            strippedTitle = movie.Title;
-            strippedTitle = strippedTitle.replace(/\s+/g, '');  //Removes spaces
+            strippedTitle = encodeURI(movie.Title);
+            //strippedTitle = strippedTitle.replace(/\s+/g, '');  //Removes spaces
             link = $("<a>", {
                 href: "/html/moviePage.html?movie=" + strippedTitle
             }).appendTo(column);

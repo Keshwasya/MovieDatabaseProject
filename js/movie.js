@@ -1,12 +1,13 @@
 const urlParams = new URLSearchParams(window.location.search);
 const requestedMovie = urlParams.get("movie");
-let requestedMovieStripped = requestedMovie.replace(/\s+/g, '');
+//let requestedMovieStripped = requestedMovie.replace(/\s+/g, '');
+let requestedMovieStripped = encodeURI(requestedMovie);
 
 //console.log(requestedMovieStripped);
 
 let req =null;
 
-function init(){ //displays correct nav bar items based on if the user is logged in or not  
+/*function init(){ //displays correct nav bar items based on if the user is logged in or not  
     req = new XMLHttpRequest();
     req.onreadystatechange = function() {
         if(this.readyState==4 && this.status==200){
@@ -44,13 +45,14 @@ function logout(){
     window.location.reload(); //reloads the page and resets the navbar
     req.open("GET",`http://localhost:3000/login`);
     req.send();
-}
+}*/
 
 $.getJSON('/js/movie-data-short.json', function(data) { 
     let rowCount = 0;
     
     $.each(data, function(i, movie) { //Loop through movie database
-        let strippedTitle = movie.Title.replace(/\s+/g, '');
+        //let strippedTitle = movie.Title.replace(/\s+/g, '');
+        let strippedTitle = encodeURI(movie.Title);
         let strippedDirector;
         let strippedWriter;
         let strippedActor;

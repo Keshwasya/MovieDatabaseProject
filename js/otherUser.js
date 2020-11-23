@@ -1,6 +1,6 @@
 let req =null;
 
-function init(){ //displays correct nav bar items based on if the user is logged in or not  
+/*function init(){ //displays correct nav bar items based on if the user is logged in or not  
     req = new XMLHttpRequest();
     req.onreadystatechange = function() {
         if(this.readyState==4 && this.status==200){
@@ -40,7 +40,7 @@ function logout(){
     window.location.reload(); //reloads the page and resets the navbar
     req.open("GET",`http://localhost:3000/login`);
     req.send();
-}
+}*/
 
 
 
@@ -55,8 +55,18 @@ $.getJSON('/users/users.json', function(data) {
     $.each(data, function(i, user) {
         if (requestedUser === user.username) {
             $("#username").text(user.username);
-            $("#users-followed").text(user.followUser.toString());
-            $("#people-followed").text(user.peopleFollow.toString());
+            $.each(user.followUser, function(j, followedUser) {
+                $("#followed-users").append("<a href='" + encodeURI("/users/" + followedUser) + "'>" + followedUser + "</a>");       
+            });
+        
+            $.each(user.peopleFollow, function(j, followedPerson) {
+                $("#followed-people").append("<a href='" + encodeURI("/people/" + followedPerson) + ">" + followedPerson + "</a>");     
+            });
+           
+           $.each(user.movies, function(j, movie) {
+                /*$("#recommended-movies").append("<a href='" + encodeURI("/movies/" + movie) + ">" + movie + "</a>"); */
+               $("<a href='" + encodeURI("/movie/" + encodeURI(movie)) + "'>" + movie + "</a>").appendTo("#recommended-movies");
+            });
         }
     });
 });

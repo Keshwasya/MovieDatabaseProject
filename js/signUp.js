@@ -2,7 +2,7 @@ let req = null;
 
 function init(){ //displays correct nav bar items based on if the user is logged in or not  
     req = new XMLHttpRequest();
-    req.onreadystatechange = function() {
+    /*req.onreadystatechange = function() {
         if(this.readyState==4 && this.status==200){
             let username = this.responseText; //gets the username from server
             document.getElementById("navBtns").innerHTML = ""; //clears the navbar in case it had already been set
@@ -29,18 +29,18 @@ function init(){ //displays correct nav bar items based on if the user is logged
     }
     
     req.open("GET", `http://localhost:3000/login/check`);  //checks what the username is
-    req.send();
+    req.send();*/
 }
 
 
 
-function logout(){
+/*function logout(){
     req = new XMLHttpRequest();
 
     window.location.reload(); //reloads the page and resets the navbar
     req.open("GET",`http://localhost:3000/login`);
     req.send();
-}
+}*/
 
 let userName = document.getElementById("username");
 let password = document.getElementById("password");

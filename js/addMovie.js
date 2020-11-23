@@ -2,7 +2,7 @@
 
 let req = null;
 
-function init(){ //displays correct nav bar items based on if the user is logged in or not  
+/*function init(){ //displays correct nav bar items based on if the user is logged in or not  
     req = new XMLHttpRequest();
     req.onreadystatechange = function() {
         if(this.readyState==4 && this.status==200){
@@ -40,7 +40,7 @@ function logout(){
     window.location.reload(); //reloads the page and resets the navbar
     req.open("GET",`http://localhost:3000/login`);
     req.send();
-}
+}*/
 
 let btn = document.getElementById("submit");
 btn.onclick = addMovies;
