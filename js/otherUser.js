@@ -55,6 +55,7 @@ $.getJSON('/users/users.json', function(data) {
     $.each(data, function(i, user) {
         if (requestedUser === user.username) {
             $("#username").text(user.username);
+            $("#profile-picture").attr("src", user.profilePic);
             $.each(user.followUser, function(j, followedUser) {
                 $("#followed-users").append("<a href='" + encodeURI("/users/" + followedUser) + "'>" + followedUser + "</a>");       
             });
@@ -67,9 +68,34 @@ $.getJSON('/users/users.json', function(data) {
                 /*$("#recommended-movies").append("<a href='" + encodeURI("/movies/" + movie) + ">" + movie + "</a>"); */
                $("<a href='" + encodeURI("/movie/" + encodeURI(movie)) + "'>" + movie + "</a>").appendTo("#recommended-movies");
             });
+            
+            $("#follow-btn").click(function(e) {
+                follow();
+            });
         }
     });
 });
+
+function follow() {
+    let req = new XMLHttpRequest();
+    req.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            let flag = this.responseText;
+            if (flag == "true") {   //If person is logged in
+                console.log("Logged in");
+                let currentUsername = $("#dropdownMenuButton").text().trim();
+                req.open("POST", "http://localhost:3000/users/follow/" + requestedUser + "&" + currentUsername);
+                req.send();
+                $("#follow-btn").hide();
+            } /*else {    //If person is logged out
+                window.location.replace("http://localhost:3000/html/login.html");
+            }*/
+        }
+    }
+    
+    req.open("GET", "http://localhost:3000/login/checkUserStatus");
+    req.send();
+}
 
 /*function getUser() {
     req = new XMLHttpRequest();

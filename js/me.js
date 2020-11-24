@@ -12,6 +12,8 @@ $.getJSON('/users/users.json', function(data) {
             peopleList = [];
             recommendedList = [];
             
+            $("#profile-picture").attr("src", user.profilePic);
+            
             //Adds links to followed users
             $.each(user.followUser, function(j, followedUser) {
                 $("#followed-users").append("<a href='" + encodeURI("/users/" + followedUser) + "'>" + followedUser + "</a>");       

@@ -6,6 +6,7 @@ const fs = require("fs");
 router.post("/", login, (req,res,next) => {res.redirect("/html/homePage.html")});
 router.get("/", logout, (req,res,next) => {res.redirect("/html/homePage.html")}); 
 router.get("/check", userCheck); //sends the username to the client for dynamic navbar
+router.get("/checkUserStatus", checkUserStatus);
 
 //router.post("/", login); //redirects to homepage 
 //router.get("/", logout); 
@@ -16,6 +17,14 @@ fs.readFile('./users/users.json', (err, data) => {
     users = JSON.parse(data); // reads the json file and stores data into users object array
     
 });
+
+function checkUserStatus(request, response) {
+    if (request.session.loggedin == true) {
+        response.end("true");
+    } else {
+        response.end("false");
+    }
+}
 
 function userCheck(request, response){
 	let result = request.session.username;
