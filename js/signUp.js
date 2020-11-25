@@ -52,6 +52,9 @@ function createUser(){
             let flag = this.responseText;
             if(flag === "False"){
                 alert("Username already taken");
+            }else if(flag === "Unauthorized access"){
+                window.location = "http://localhost:3000/";
+                alert("Unauthorized access\nYou are logged in. Log out to create a new account.");
             }else{
                 window.location = "http://localhost:3000/";
             }

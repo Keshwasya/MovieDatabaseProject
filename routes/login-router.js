@@ -32,10 +32,9 @@ function userCheck(request, response){
 }
 
 function login(request, response, next){ 
-	if(request.session.loggedin == true){ //Can only log in once
-		console.log("Already logged in");
-		//response.status(401).send("already logged in");
-		response.end("False");
+	if(request.session.loggedin == true){
+		console.log("You are already logged in. You need to log out to log in");
+		response.send("Unauthorized access");
 		return;
 	}
 

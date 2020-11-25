@@ -22,7 +22,11 @@ fs.readFile('./users/usersNum.json', (err, data) => {
 //adding new users
 function addUsers(request, response){ // the js files send a post request at the URL addUser
 
-	
+	if(request.session.loggedin == true){
+		console.log("You are logged in. Log out to create a new account.");
+		response.send("Unauthorized access");
+		return;
+	}
 	for(let i=0;i<users.length;i++){ //only uniqe
 		if(request.query.user === users[i].username){
 			response.end("False");
