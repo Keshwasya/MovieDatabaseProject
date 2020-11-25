@@ -16,17 +16,17 @@ $.getJSON('/users/users.json', function(data) {
             
             //Adds links to followed users
             $.each(user.followUser, function(j, followedUser) {
-                $("#followed-users").append("<a href='" + encodeURI("/users/" + followedUser) + "'>" + followedUser + "</a>");       
+                $("#followed-users").append("<a href='" + encodeURI("/users/" + followedUser) + "'>" + followedUser + " </a>");       
             });
         
             //
             $.each(user.peopleFollow, function(j, followedPerson) {
-                $("#followed-people").append("<a href='" + encodeURI("/people/" + followedPerson) + ">" + followedPerson + "</a>");     
+                $("#followed-people").append("<a href='" + encodeURI("/people/" + followedPerson) + ">" + followedPerson + " </a>");     
             });
            
            $.each(user.movies, function(j, movie) {
                 /*$("#recommended-movies").append("<a href='" + encodeURI("/movies/" + movie) + ">" + movie + "</a>"); */
-               $("<a href='" + encodeURI("/movie/" + encodeURI(movie)) + "'>" + movie + "</a>").appendTo("#recommended-movies");
+               $("<a href='" + encodeURI("/movie/" + encodeURI(movie)) + "'>" + movie + " </a>").appendTo("#recommended-movies");
             });
             
             $("#username").text(user.username);
