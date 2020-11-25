@@ -44,15 +44,14 @@ function login(request, response, next){
 			request.session.loggedin = true;
 			request.session.username = request.query.user;
 			request.session.password = request.query.pass;
-			console.log("Logged in")
+			console.log("Logged in");
 			response.end("True");
-			break;
+			return;
 		}
 	}
-	if(request.session.loggedin == false){
-		console.log("Wrong username or password");
-		response.end("False");
-	}
+	//console.log(request.session.username);
+	console.log("Wrong username or password");
+	response.end("False");
 	
 	
 	//request.session = Set-Cookie

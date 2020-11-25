@@ -47,7 +47,16 @@ let password = document.getElementById("password");
 
 function createUser(){
     req = new XMLHttpRequest();
-    
+    req.onreadystatechange = function() {
+        if(this.readyState==4 && this.status==200){
+            let flag = this.responseText;
+            if(flag === "False"){
+                alert("Username already taken");
+            }else{
+                window.location = "http://localhost:3000/";
+            }
+        }
+    }
     req.open("POST", `http://localhost:3000/addUser?user=${userName.value}&pass=${password.value}`);
     req.send();
 }

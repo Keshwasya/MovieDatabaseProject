@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Sign Up Page</title>
+  <title>Login Page</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -12,6 +12,15 @@
   <script src='https://kit.fontawesome.com/a076d05399.js'></script><!-- adds icons for bootstrap 4 -->
   <link href="/images/favicon-16x16.png" rel="icon">
   <link href="/css/database.css" rel="stylesheet"> <!--style sheet for database-->
+  <style>
+
+    html footer { 
+        align-content: center;
+        align-items: center;
+        align-self: center;
+        text-align: center;
+    }
+  </style>
 </head>
 
 
@@ -26,54 +35,35 @@
     </nav>
 
     <div class="container">
-        <h2><br>Sign Up Page</h2>
-        <p>Enter a username and password for your new 7th Art account! You will have a basic account once you sign up.
-            To get contributor privileges you must upgrade on your user profile.  
-        </p>
+        <h2><br>Login Page</h2>
+        <p>Enter your username and password to login to your account.</p>
+        
         <div class="form-group">
-            <label for="username">Username:</label>
+            <label for="username" style="text-align: left;">Username:</label>
             <input type="text" class="form-control" id="username" placeholder="Enter username" name="username">
             <div class="invalid-feedback">Oops, you missed this one.</div>
         </div>
         <div class="form-group">
-            <label for="pwd">Password:</label>
-            <input type="password" class="form-control" id="password" placeholder="Enter password" name="pswd">
+            <label for="password">Password:</label>
+            <input type="password" class="form-control" id="password" placeholder="Enter password" name="pswd"><a class="link" href="/html/forgotPassword.html">Forgot Password?</a>
         </div>
-        <button type="submit" id="submitBtn" onclick="createUser()" data-toggle="modal" data-target="#popUp" class="btn btn-outline-primary">Submit</button>
-
-        <!-- pop up -->
-        <!-- <div class="modal" id="popUp">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                
-                    <div class="modal-header" style="background-color: black;">
-                        <h4 class="modal-title">Sign Up</h4>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
-                    
-                    <div class="modal-body" style="background-color: black;">Account Created!!!</div>
-                
-                    <div class="modal-footer" style="background-color: black;">
-                        <button type="submit" class="btn btn-outline-danger" data-dismiss="modal" id="submit">Close</button>
-                    </div>
-                    
-                </div>
-            </div>
-        </div> -->
-
-
-
-
+        <div class="form-group form-check">
+            <label class="form-check-label">
+            <input class="form-check-input" type="checkbox" name="remember"> Remember me
+            </label>
+        </div>
+        <button type="submit" class="btn btn-outline-primary" id="submit">Submit</button>
+        
     </div>
 
-    <footer style="text-align: center;">
+    <footer>
         <div class="bottom-bar">
-            <br><br><br><br><br><br><br><br><br><br><br><br>
+            <br><br><br><br><br><br><br><br><br><br><br>
             <a href="#top"><i class="fa fa-arrow-up" aria-hidden=true></i></a>
             <p>&copy;Kesh + Dan 2020</p>
         </div>
     </footer>
     <script src="/js/navbar.js"></script>
-    <script src="/js/signUp.js"></script>
+    <script src="/js/login.js"></script>
 </body>
 </html>

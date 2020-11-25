@@ -36,7 +36,7 @@ app.use(session({
     resave: true,
 	saveUninitialized: true,
 	name:"UserDataCookie",
-	cookie: {loggedin:false, username:"", password:""} //defult cookie values
+	cookie: {loggedin: false, username:"", password:""} //defult cookie values
 }));
 
 //app.use("/", auth);
@@ -56,8 +56,6 @@ app.get('/users/users.json', function(req,res){
     res.sendFile(__dirname + "/users/users.json");
 });
 app.use("/users", usersRouter);
-app.use("/me", meRouter);
-app.use("/movie", movieRouter);
 
 function auth(request, response, next){
 	if(request.session.loggedin){
