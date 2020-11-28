@@ -11,10 +11,11 @@ const requestedUser = urlParams.get("username"); //Other person
 //getUser();
 
 $.getJSON('/users/users.json', function(data) { 
-    usersObject = JSON.parse(data);
+    usersObject = data;
+    initPage();
 });
 
-function init() {
+function initPage() {
     $.each(usersObject, function(i, user) {
         if (requestedUser === user.username) { //Find other user
             $("#username").text(user.username);
@@ -33,15 +34,18 @@ function init() {
             });
             
             $("#follow-btn").click(function(e) {
+                e.stopPropagation();
                 follow();
+                return false;
             });
             
             $("#unfollow-btn").click(function(e) {
-               unfollow(); 
+                e.stopPropagation();
+                unfollow(); 
+                return false;
             });
             
             updateFollowButton();
-            break;
         }
     });
 }
@@ -51,11 +55,12 @@ function isLoggedIn() {
     req.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             let flag = this.responseText;
-            if (flag == "true") {   //If person is logged in
+            if (flag === "true") {   //If person is logged in
                 return true;
+            } else {
+                return false;
             }
         }
-        return false;
     }
     
     req.open("GET", "http://localhost:3000/login/checkUserStatus");
@@ -65,28 +70,47 @@ function isLoggedIn() {
 function follow() {
     let req = new XMLHttpRequest();
     
-    if (isLoggedIn() == true) {
-        req.open("POST", "http://localhost:3000/users/follow/" + requestedUser + "&" + currentUsername);
-        req.send();
-    } else {
-        console.log("Invalid: user not logged in.");
+    req.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            let flag = this.responseText;
+            if (flag === "true") {   //If person is logged in
+                req.open("POST", "http://localhost:3000/users/follow/" + requestedUser + "&" + currentUsername);
+                req.send();
+            } else {
+                console.log("Invalid: user not logged in. Cannot follow.");
+            }
+        }
     }
+    
+    req.open("GET", "http://localhost:3000/login/checkUserStatus");
+    req.send();
+    
+    updateFollowButton();
 }
 
 function unfollow() {
     let req = new XMLHttpRequest();
     
-    if (isLoggedIn() == true) {
-        req.open("POST", "http://localhost:3000/users/" + requestedUser + "/unfollow/" + currentUsername);
-        req.send();
-    } else {
-        console.log("Invalid: user not logged in.");
+    req.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            let flag = this.responseText;
+            if (flag === "true") {   //If person is logged in
+                req.open("POST", "http://localhost:3000/users/" + requestedUser + "/unfollow/" + currentUsername);
+                req.send();
+            } else {
+                console.log("Invalid: user not logged in. Cannot unfollow.");
+            }
+        }
     }
+    
+    req.open("GET", "http://localhost:3000/login/checkUserStatus");
+    req.send();
+    
+    updateFollowButton();
 }
 
 function updateFollowButton() {
     let req = new XMLHttpRequest();
-    
     req.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             let flag = this.responseText;
@@ -100,8 +124,6 @@ function updateFollowButton() {
         }
     }
     
-    if (isLoggedIn() == true) {
-        req.open("GET", "http://localhost:3000/users/" + currentUsername + "/follows/" + requestedUser);
-        req.send();
-    }
+    req.open("GET", "http://localhost:3000/users/" + currentUsername + "/follows/" + requestedUser);
+    req.send();
 }

@@ -15,7 +15,7 @@ fs.readFile('./users/users.json', (err, data) => {
     users = JSON.parse(data); // reads the json file and stores data into movies object array
 });
 
-function checkFollow(request, resposne) {
+function checkFollow(request, response) {
     let currentUser = decodeURI(request.params.user);
     let targetUser = decodeURI(request.params.targetUser);
     

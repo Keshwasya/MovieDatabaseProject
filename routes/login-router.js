@@ -21,8 +21,10 @@ fs.readFile('./users/users.json', (err, data) => {
 function checkUserStatus(request, response) {
     if (request.session.loggedin == true) {
         response.end("true");
+        console.log("User: " + request.session.username + " logged in");
     } else {
         response.end("false");
+        console.log("User not logged in");
     }
 }
 

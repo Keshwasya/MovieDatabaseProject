@@ -51,7 +51,9 @@ app.use("/images", express.static(__dirname + "/images"));
 app.use("/login", loginRouter);
 app.use("/addUser", addUserRouter);
 app.use('/movies', searchDatabaseRouter);
+app.use("/movie", movieRouter);
 app.use("/people", peopleRouter);
+app.use("/me", meRouter);
 app.get('/users/users.json', function(req,res){
     res.sendFile(__dirname + "/users/users.json");
 });
