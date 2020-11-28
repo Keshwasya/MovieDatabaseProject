@@ -1,59 +1,22 @@
 let req =null;
-
-/*function init(){ //displays correct nav bar items based on if the user is logged in or not  
-    req = new XMLHttpRequest();
-    req.onreadystatechange = function() {
-        if(this.readyState==4 && this.status==200){
-            let username = this.responseText; //gets the username from server
-            document.getElementById("navBtns").innerHTML = ""; //clears the navbar in case it had already been set
-
-            if(username == "" || username.length == 2){ //if not logged in then these items will be added to the nav bar
-                let navItems = '<li class="nav-item"> <a class="nav-link" href="/html/login.html"> <i class="fas fa-sign-in-alt" style="color: lightpink;"> </i> Login </a> </li> <li class="nav-item"> <a class="nav-link" href="/html/signUp.html"> <i class="fas fa-user-alt" style="color: lightpink;"> </i> Sign Up</a> </li> ';
-
-                document.getElementById("navBtns").innerHTML = navItems;
-                
-            }else{ //if logged in then these items will be added to the nav bar
-                let navItems = '<li class="dropdown dropleft">\
-                                    <a class="nav-link dropdown-toggle" style="color: lightpink;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
-                                    ' + username.replace(/['"]+/g, '') +'</a>\
-                                    <div class="dropdown-menu">\
-                                        <a class="dropdown-item" href="#">User Page</a>\
-                                        <a class="dropdown-item" onclick="logout()" href="#">Log Out</a>\
-                                    </div>\
-                                </li>'; // username.replace(/['"]+/g, '') gets rid of the double quotes around the
-                                //THE HREF IN THE USER PAGE ITEM WILL LINK TO YOUR PAGE
-                document.getElementById("navBtns").innerHTML = navItems;
-            }
-            //console.log("Username: " + username); //checking if username is correctly sent from server         
-        }
-    }
-    
-    req.open("GET", `http://localhost:3000/login/check`);  //checks what the username is
-    req.send();
-}
-
-
-
-function logout(){
-    req = new XMLHttpRequest();
-
-    window.location.reload(); //reloads the page and resets the navbar
-    req.open("GET",`http://localhost:3000/login`);
-    req.send();
-}*/
+let usersObject;
+let currentUsername; //Person logged in
 
 
 
 const urlParams = new URLSearchParams(window.location.search);
-const requestedUser = urlParams.get("username");
-console.log(requestedUser);
+const requestedUser = urlParams.get("username"); //Other person
 //let decodedPerson = decodeURIComponent(requestedPerson);
 
 //getUser();
 
 $.getJSON('/users/users.json', function(data) { 
-    $.each(data, function(i, user) {
-        if (requestedUser === user.username) {
+    usersObject = JSON.parse(data);
+});
+
+function init() {
+    $.each(usersObject, function(i, user) {
+        if (requestedUser === user.username) { //Find other user
             $("#username").text(user.username);
             $("#profile-picture").attr("src", user.profilePic);
             $.each(user.followUser, function(j, followedUser) {
@@ -72,43 +35,73 @@ $.getJSON('/users/users.json', function(data) {
             $("#follow-btn").click(function(e) {
                 follow();
             });
+            
+            $("#unfollow-btn").click(function(e) {
+               unfollow(); 
+            });
+            
+            updateFollowButton();
+            break;
         }
     });
-});
+}
 
-function follow() {
+function isLoggedIn() {
     let req = new XMLHttpRequest();
     req.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             let flag = this.responseText;
             if (flag == "true") {   //If person is logged in
-                console.log("Logged in");
-                let currentUsername = $("#dropdownMenuButton").text().trim();
-                req.open("POST", "http://localhost:3000/users/follow/" + requestedUser + "&" + currentUsername);
-                req.send();
-                $("#follow-btn").hide();
-            } /*else {    //If person is logged out
-                window.location.replace("http://localhost:3000/html/login.html");
-            }*/
+                return true;
+            }
         }
+        return false;
     }
     
     req.open("GET", "http://localhost:3000/login/checkUserStatus");
     req.send();
 }
 
-/*function getUser() {
-    req = new XMLHttpRequest();
+function follow() {
+    let req = new XMLHttpRequest();
+    
+    if (isLoggedIn() == true) {
+        req.open("POST", "http://localhost:3000/users/follow/" + requestedUser + "&" + currentUsername);
+        req.send();
+    } else {
+        console.log("Invalid: user not logged in.");
+    }
+}
+
+function unfollow() {
+    let req = new XMLHttpRequest();
+    
+    if (isLoggedIn() == true) {
+        req.open("POST", "http://localhost:3000/users/" + requestedUser + "/unfollow/" + currentUsername);
+        req.send();
+    } else {
+        console.log("Invalid: user not logged in.");
+    }
+}
+
+function updateFollowButton() {
+    let req = new XMLHttpRequest();
+    
     req.onreadystatechange = function() {
-        if(this.readyState==4 && this.status==200){
-            
-            let result = JSON.parse(this.responseText);
-            console.log(result);
-            
-            $("#username").text(result.username);
-            $("#users-followed").text(result.followUser.toString());
-            $("#people-followed").text(result.peopleFollow.toString);
-            //Change profile pic
+        if (this.readyState == 4 && this.status == 200) {
+            let flag = this.responseText;
+            if (flag == "true") {   //If current user follows other person
+                $("#follow-btn").hide();
+                $("#unfollow-btn").show();
+            } else {
+                $("#follow-btn").show();
+                $("#unfollow-btn").hide();
+            }
         }
     }
-}*/
+    
+    if (isLoggedIn() == true) {
+        req.open("GET", "http://localhost:3000/users/" + currentUsername + "/follows/" + requestedUser);
+        req.send();
+    }
+}
