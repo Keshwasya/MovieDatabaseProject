@@ -1,7 +1,7 @@
 let req = null;
 
-function init(){ //displays correct nav bar items based on if the user is logged in or not  
-    req = new XMLHttpRequest();
+//function init(){ //displays correct nav bar items based on if the user is logged in or not  
+  //  req = new XMLHttpRequest();
     /*req.onreadystatechange = function() {
         if(this.readyState==4 && this.status==200){
             let username = this.responseText; //gets the username from server
@@ -30,7 +30,7 @@ function init(){ //displays correct nav bar items based on if the user is logged
     
     req.open("GET", `http://localhost:3000/login/check`);  //checks what the username is
     req.send();*/
-}
+//}
 
 
 
@@ -47,7 +47,19 @@ let password = document.getElementById("password");
 
 function createUser(){
     req = new XMLHttpRequest();
-    
+    req.onreadystatechange = function() {
+        if(this.readyState==4 && this.status==200){
+            let flag = this.responseText;
+            if(flag === "False"){
+                alert("Username already taken");
+            }else if(flag === "Unauthorized access"){
+                window.location = "http://localhost:3000/";
+                alert("Unauthorized access\nYou are logged in. Log out to create a new account.");
+            }else{
+                window.location = "http://localhost:3000/";
+            }
+        }
+    }
     req.open("POST", `http://localhost:3000/addUser?user=${userName.value}&pass=${password.value}`);
     req.send();
 }

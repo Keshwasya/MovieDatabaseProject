@@ -34,17 +34,21 @@ function checkFollow(request, resposne) {
 function followUser(request, response) {
     let currentUser = decodeURI(request.params.user);
     let targetUser = decodeURI(request.params.userToFollow);
-    console.log("User " + currentUser + " following: " + targetUser);
+    
+    //console.log("User " + currentUser + " following: " + targetUser);
     for(let i=0; i<users.length;i++){
-        if ((users[i].username == currentUser) && !(targetUser in users[i].followUser)) { //If user not already followed target user
-            users[i].followUser.push(targetUser);
-            fs.writeFile("./users/users.json", JSON.stringify(users), function writeJSON(err) {
-               if (err) throw err;
-                console.log("Succesfully followed user");
-                response.end("true");
-                return;
-            });
+        for(let x=0; x<users[i].followUser.length; x++){
+            if ((users[i].username == currentUser) && !(targetUser === users[i].followUser[x])) { //If user not already followed target user
+                users[i].followUser.push(targetUser);
+                fs.writeFile("./users/users.json", JSON.stringify(users), function writeJSON(err) {
+                if (err) throw err;
+                    console.log("Succesfully followed user");
+                    response.end("true");
+                    return;
+                });
+            }
         }
+
     }
     response.end("false");
 }

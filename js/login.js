@@ -57,6 +57,9 @@ function login(){
             let flag = this.responseText;
             if(flag === "True"){
                 window.location = "http://localhost:3000/";
+            }else if(flag === "Unauthorized access"){
+                window.location = "http://localhost:3000/";
+                alert("Unauthorized access\nYou are already logged in. You need to log out to log in");
             }else{
                 alert("Wrong Username or password");
             }

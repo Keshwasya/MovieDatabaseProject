@@ -32,10 +32,9 @@ function userCheck(request, response){
 }
 
 function login(request, response, next){ 
-	if(request.session.loggedin == true){ //Can only log in once
-		console.log("Already logged in");
-		//response.status(401).send("already logged in");
-		response.end("False");
+	if(request.session.loggedin == true){
+		console.log("You are already logged in. You need to log out to log in");
+		response.send("Unauthorized access");
 		return;
 	}
 
@@ -44,15 +43,14 @@ function login(request, response, next){
 			request.session.loggedin = true;
 			request.session.username = request.query.user;
 			request.session.password = request.query.pass;
-			console.log("Logged in")
+			console.log("Logged in");
 			response.end("True");
-			break;
+			return;
 		}
 	}
-	if(request.session.loggedin == false){
-		console.log("Wrong username or password");
-		response.end("False");
-	}
+	//console.log(request.session.username);
+	console.log("Wrong username or password");
+	response.end("False");
 	
 	
 	//request.session = Set-Cookie

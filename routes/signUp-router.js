@@ -22,11 +22,18 @@ fs.readFile('./users/usersNum.json', (err, data) => {
 //adding new users
 function addUsers(request, response){ // the js files send a post request at the URL addUser
 
-	//request.session.loggedin = true;
-	//console.log(request.session);
-
-	if(request.session.loggedin == false){ // you can only create an acount if you are not logged in
-
+	if(request.session.loggedin == true){
+		console.log("You are logged in. Log out to create a new account.");
+		response.send("Unauthorized access");
+		return;
+	}
+	for(let i=0;i<users.length;i++){ //only uniqe
+		if(request.query.user === users[i].username){
+			response.end("False");
+			return;
+		}
+	}
+	//if(request.session.loggedin){ // you can only create an acount if you are not logged in
 		//create an empty user account
 		usersNum++;
 		let user = {username: "", password: "" , id: usersNum ,profilePic: "", member : false, followUser: {}, peopleFollow: {}, movies: {}};
@@ -49,10 +56,10 @@ function addUsers(request, response){ // the js files send a post request at the
 			console.log('User Added');
 		});
 		writeStream.end();// close the stream
-
-	}else{
-		console.log("You are logged in. Log out to create a new account.")
-	}
+		//res.sendFile(__dirname + "/html/homePage.html");
+	// }else{
+	// 	console.log("You are logged in. Log out to create a new account.")
+	// }
 
 }
 
