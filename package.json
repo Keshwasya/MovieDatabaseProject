@@ -6,12 +6,12 @@
   "dependencies": {
     "express": "^4.17.1",
     "express-session": "^1.17.1",
-    "mongodb": "^3.6.2"
+    "mongodb": "^3.6.3"
   },
   "devDependencies": {},
   "scripts": {
     "test": "test",
-    "start": "node movieDatabase-server.js"
+    "start": "mongod --dbpath ./database & node movieDatabase-server.js"
   },
   "repository": {
     "type": "git",

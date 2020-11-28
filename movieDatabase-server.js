@@ -16,6 +16,26 @@ let movieRouter = require("./routes/movie-router.js");
 const mongo = require('mongodb');
 const mongoClient = mongo.MongoClient;
 
+let dbURL = "mongodb://localhost:27017/";
+
+mongoClient.connect(dbURL, function(err, db) {
+  if (err) throw err;
+  console.log("Connected to db");
+  let dbo = db.db("db");
+  
+  dbo.createCollection("users", function(err, res) {
+    if (err) throw err;
+    console.log("Connected to users db");
+  })
+  
+  dbo.createCollection("movies", function(err, res) {
+    if (err) throw err;
+    console.log("Connected to movies db");
+  });
+  
+  db.close();
+});
+
 
 app.use(express.static('/public'));
 app.get('/', function(req,res){

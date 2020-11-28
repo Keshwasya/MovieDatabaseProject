@@ -74,6 +74,7 @@ function follow() {
         if (this.readyState == 4 && this.status == 200) {
             let flag = this.responseText;
             if (flag === "true") {   //If person is logged in
+                console.log("Following user");
                 req.open("POST", "http://localhost:3000/users/follow/" + requestedUser + "&" + currentUsername);
                 req.send();
             } else {
