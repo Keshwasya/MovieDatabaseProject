@@ -18,24 +18,6 @@ const mongoClient = mongo.MongoClient;
 
 let dbURL = "mongodb://localhost:27017/";
 
-mongoClient.connect(dbURL, function(err, db) {
-  if (err) throw err;
-  console.log("Connected to db");
-  let dbo = db.db("db");
-  
-  dbo.createCollection("users", function(err, res) {
-    if (err) throw err;
-    console.log("Connected to users db");
-  })
-  
-  dbo.createCollection("movies", function(err, res) {
-    if (err) throw err;
-    console.log("Connected to movies db");
-  });
-  
-  db.close();
-});
-
 
 app.use(express.static('/public'));
 app.get('/', function(req,res){
@@ -103,15 +85,26 @@ function auth(request, response, next){
 	
 // });
 
-app.listen(3000);
+mongoClient.connect(dbURL, function(err, db) {
+  if (err) throw err;
+  console.log("Connected to db");
+  let dbo = db.db("db");
+  
+  app.locals.db = dbo;
+  
+  //db.close();
+  
+  app.listen(3000);
+  
+  //Server listens on port 3000
+  console.log('Server running at localhost:3000/');
+});
+
+
 
 /*let mimeLookup = {
 	'.js': 'application/javascript',
 	'.html': 'text/html',
 	'.jpg': 'image/jpeg',
 	'.png': 'image/png'
-};
-
-//Server listens on port 3000
-server.listen(3000);*/
-console.log('Server running at http://127.0.0.1:3000/');
+};server.listen(3000);*/

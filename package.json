@@ -11,7 +11,9 @@
   "devDependencies": {},
   "scripts": {
     "test": "test",
-    "start": "mongod --dbpath ./database & node movieDatabase-server.js"
+    "start": "node movieDatabase-server.js",
+    "start-database": "mongod --dbpath ./database",
+    "stop-database": "mongod --shutdown"
   },
   "repository": {
     "type": "git",

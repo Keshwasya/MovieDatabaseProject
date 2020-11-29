@@ -11,13 +11,6 @@ router.get("/checkUserStatus", checkUserStatus);
 //router.post("/", login); //redirects to homepage 
 //router.get("/", logout); 
 
-let users = [];
-fs.readFile('./users/users.json', (err, data) => {
-    if (err) throw err;
-    users = JSON.parse(data); // reads the json file and stores data into users object array
-    
-});
-
 function checkUserStatus(request, response) {
     if (request.session.loggedin == true) {
         response.end("true");
@@ -40,7 +33,7 @@ function login(request, response, next){
 		return;
 	}
 
-	for(let i=0; i<users.length;i++){
+	/*for(let i=0; i<users.length;i++){
 		if(users[i].username == request.query.user && users[i].password == request.query.pass){
 			request.session.loggedin = true;
 			request.session.username = request.query.user;
@@ -49,11 +42,26 @@ function login(request, response, next){
 			response.end("True");
 			return;
 		}
-	}
+	}*/
+  
+    let username = decodeURI(request.query.user);
+    let password = decodeURI(request.query.pass);
+    request.app.locals.db.collection("users").findOne({"username": username, "password": password}, function(err, user) {
+       if (err) {
+           throw err;
+       } else if (user) {   //User is found
+           request.session.loggedin = true;
+           request.session.username = username;
+           request.session.password = password;
+           console.log("Logged in");
+           response.end("True");
+           return;
+       } else {
+           console.log("Wrong username or password");
+	       response.end("False");
+       }
+    });
 	//console.log(request.session.username);
-	console.log("Wrong username or password");
-	response.end("False");
-	
 	
 	//request.session = Set-Cookie
 	//request.session.loggedin = true;
