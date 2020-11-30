@@ -7,11 +7,6 @@ router.post("/", addUsers);
 
 let users = [];
 let usersNum = [];
-fs.readFile('./users/users.json', (err, data) => {
-    if (err) throw err;
-    users = JSON.parse(data); // reads the json file and stores data into users object array
-    
-});
 fs.readFile('./users/usersNum.json', (err, data) => {
     if (err) throw err;
     //usersNum = JSON.parse(data); // reads the json file and stores data into users object array
@@ -70,6 +65,7 @@ function addUsers(request, response){ // the js files send a post request at the
 		//users.push(user);
   
         request.app.locals.db.collection("users").insert(user);
+        console.log("Account created: " + user.username);
 		/*let writeStream = fs.createWriteStream("./users/users.json");
 		writeStream.write(JSON.stringify(users));// write user to file
 		writeStream.on('finish', () => {

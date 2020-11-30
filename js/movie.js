@@ -5,8 +5,6 @@ let requestedMovieStripped = encodeURI(requestedMovie);
 
 //console.log(requestedMovieStripped);
 
-let req =null;
-
 /*function init(){ //displays correct nav bar items based on if the user is logged in or not  
     req = new XMLHttpRequest();
     req.onreadystatechange = function() {
@@ -46,39 +44,47 @@ function logout(){
     req.open("GET",`http://localhost:3000/login`);
     req.send();
 }*/
-
-$.getJSON('/js/movie-data-short.json', function(data) { 
-    let rowCount = 0;
-    
-    $.each(data, function(i, movie) { //Loop through movie database
         //let strippedTitle = movie.Title.replace(/\s+/g, '');
+
+let req = new XMLHttpRequest();
+
+req.onreadystatechange = function() {
+    //let movie = this.response;
+    if(this.readyState==4 && this.status==200){
+        let movie = JSON.parse(this.response);
+        console.log(movie);
+        if (movie === "failed") {
+            console.log("Movie not found");
+            return;
+        }
+
         let strippedTitle = encodeURI(movie.Title);
         let strippedDirector;
         let strippedWriter;
         let strippedActor;
-        
-        if (requestedMovieStripped === strippedTitle) {
+
             $("#title").text(movie.Title);
             $("#release").text(movie.Year);
-            //$("#rating").text(movie.Ratings[0].Value); //IMDB rating
-            $("#rating").text(movie.imdbRating); //IMDB rating
+                //$("#rating").text(movie.Ratings[0].Value); //IMDB rating
+            $("#imdb-rating").text("IMDB Rating: " + movie.imdbRating + "/10"); //IMDB rating
+            $("#metascore").text("Metascore: " + movie.Metascore + "/100");
             $("#time").text(movie.Runtime);
             $("#genre").text(movie.Genre);
-            
-            //$("#director").text(movie.Director);
-            
+
+                    //$("#director").text(movie.Director);
+
             $("<a>", {
                 text: movie.Director,
                 href: encodeURI("/people/" + movie.Director) //Removes spaces
             }).appendTo("#director");
-            
-            
-            //$("#writers").text(movie.Writer);
-            let writerArray = movie.Writer.replace(/ *\([^)]*\) */g, " ").split(",");
-            //console.log(writerArray); //array of writers
 
-            //Removes all text within brackets and separates into elements of array
-            
+
+                    //$("#writers").text(movie.Writer);
+            let writerArray = movie.Writer.replace(/ *\([^)]*\) */g, " ").split(",");
+                    //console.log(writerArray); //array of writers
+
+                    //Removes all text within brackets and separates into elements of array
+
             for (let i = 0; i < writerArray.length; i++) {
                 let writerName = writerArray[i];
                 $("<a>", {
@@ -86,8 +92,8 @@ $.getJSON('/js/movie-data-short.json', function(data) {
                     href: encodeURI(("/people/" + writerName).trim())
                 }).appendTo("#writers");
             }
-            
-            //$("#actors").text(movie.Actors);
+
+                    //$("#actors").text(movie.Actors);
             let actorsArray = movie.Actors.split(",");
             for (let i = 0; i < actorsArray.length; i++) {
                 let actorName = actorsArray[i].trim();
@@ -96,9 +102,16 @@ $.getJSON('/js/movie-data-short.json', function(data) {
                     href: encodeURI("/people/" + actorName)
                 }).appendTo("#actors");
             }
-            
+
             $("#summary").text(movie.Plot);
             $("#poster").attr("src", movie.Poster);
-        }
-    });
+    }
+}
+
+req.open("GET", "http://localhost:3000/movie/getMovieData/" + requestedMovieStripped);
+req.send();
+
+$("#submit").submit(function(e) {   //Listener for submit
+    
+    e.preventDefault();
 });

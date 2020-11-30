@@ -3,6 +3,7 @@ let router = express.Router();
 const fs = require("fs");
 
 router.get("/:person", searchPeople);
+router.get("/getMoviesStarred/:person", getMoviesStarred);
 
 let movies = [];
 //Will later on look at MongoDB database
@@ -32,6 +33,23 @@ function searchPeople(request, response) {
     
     //Send person param to page
     response.redirect("/html/personPage.html?personName=" + request.params.person);
+}
+
+function getMoviesStarred(request, response) {
+    let personName = request.params.person;
+    let decodedName = decodeURI(personName);
+    console.log("Searching for movies with " + decodedName);
+    let foundMovies = request.app.locals.db.collection("movies").find({ $or: [{"Director": decodedName, "Writer": {$regex: decodedName}, "Actors": {$regex: decodedName}}]}).toArray(function(err, document) {
+        if (err) {
+            throw err;
+        } else if (document) { //Exists
+            console.log(document);
+            response.send(document);
+            response.end();
+        } else {
+            console.log("No movies found for person search");
+        }
+    });
 }
 
 module.exports = router;

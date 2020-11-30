@@ -44,3 +44,21 @@ function logout(){
     request.open("GET",`http://localhost:3000/login`);
     request.send();
 }
+
+function checkLogin() {
+    request = new XMLHttpRequest();
+    
+    request.onreadystatechange = function() {
+        if(this.readyState==4 && this.status==200){
+            if (this.responseText == "true") {
+                console.log("Logged in");
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+    
+    request.open("GET", "http://localhost:3000/login/checkLogin");
+    request.send();
+}

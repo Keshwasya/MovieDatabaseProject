@@ -1,5 +1,3 @@
-let req =null;
-
 /*function init(){ //displays correct nav bar items based on if the user is logged in or not  
     req = new XMLHttpRequest();
     req.onreadystatechange = function() {
@@ -42,56 +40,6 @@ function logout(){
     req.send();
 }*/
 
-
-
-const urlParams = new URLSearchParams(window.location.search);
-const requestedPerson = urlParams.get("personName");
-let decodedPerson = decodeURIComponent(requestedPerson);
-
-//console.log(decodedPerson);
-
-let result = {roles: [], movieTitles: []};
-
-$.getJSON('/js/movie-data-short.json', function(data) { 
-    let rowCount = 0;
-    
-    $.each(data, function(i, movie) { //Loop through movie database
-        let decodedTitle = movie.Title.replace(/\s+/g, '');
-        let strippedDirector;
-        let strippedWriter;
-        let strippedActor;
-        
-        //Look through actor, loop through writers (startsWith), and then actors
-        if (movie.Director.toLowerCase().startsWith(decodedPerson.toLowerCase())) {
-            //Do stuff
-            addPersonInformation("Director", movie.Title, result);
-            /*if (!(result.roles.includes("Director"))) {
-                result.roles.push("Director");
-            }*/
-        }
-        
-        let writerArray = movie.Writer.replace(/ *\([^)]*\) */g, " ").split(",");
-        for (let j = 0; j < writerArray.length; j++) {
-            if (writerArray[j].toLowerCase().startsWith(decodedPerson.toLowerCase())) {
-                //if (!(result.movieTitles.includes()))
-                addPersonInformation("Writer", movie.Title, result);
-            }
-        }
-            
-        let actorsArray = movie.Actors.replace(/ *\([^)]*\) */g, " ").split(",");
-        for (let j = 0; j < actorsArray.length; j++) {
-            if (actorsArray[j].toLowerCase().startsWith(decodedPerson.toLowerCase())) {
-                addPersonInformation("Actor", movie.Title, result);
-            }
-        }
-
-    });
-    
-    $("#person-name").text(decodedPerson);
-    $("#roles").text(result.roles.toString());
-    $("#movies").text(result.movieTitles.toString());
-});
-    
 function addPersonInformation(role, movieTitle, result) {
     
     if (!(result.roles.includes(role))) { //If role isn't already added, add it
@@ -104,3 +52,63 @@ function addPersonInformation(role, movieTitle, result) {
         console.log("Featured in: " + movieTitle);
     }
 }
+
+
+const urlParams = new URLSearchParams(window.location.search);
+const requestedPerson = urlParams.get("personName");
+let decodedPerson = decodeURIComponent(requestedPerson);
+
+//console.log(decodedPerson);
+
+let result = {roles: [], movieTitles: []};
+
+//$.getJSON('/js/movie-data-short.json', function(data) { 
+let req = new XMLHttpRequest();
+
+req.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        let rowCount = 0;
+
+        let data = JSON.parse(this.response);
+        console.log(data);
+
+        $.each(data, function(i, movie) { //Loop through movie database
+            let decodedTitle = movie.Title.replace(/\s+/g, '');
+            let strippedDirector;
+            let strippedWriter;
+            let strippedActor;
+
+            //Look through actor, loop through writers (startsWith), and then actors
+            if (movie.Director.toLowerCase().startsWith(decodedPerson.toLowerCase())) {
+                //Do stuff
+                addPersonInformation("Director", movie.Title, result);
+                /*if (!(result.roles.includes("Director"))) {
+                    result.roles.push("Director");
+                }*/
+            }
+
+            let writerArray = movie.Writer.replace(/ *\([^)]*\) */g, " ").split(",");
+            for (let j = 0; j < writerArray.length; j++) {
+                if (writerArray[j].toLowerCase().startsWith(decodedPerson.toLowerCase())) {
+                    //if (!(result.movieTitles.includes()))
+                    addPersonInformation("Writer", movie.Title, result);
+                }
+            }
+
+            let actorsArray = movie.Actors.replace(/ *\([^)]*\) */g, " ").split(",");
+            for (let j = 0; j < actorsArray.length; j++) {
+                if (actorsArray[j].toLowerCase().startsWith(decodedPerson.toLowerCase())) {
+                    addPersonInformation("Actor", movie.Title, result);
+                }
+            }
+
+        });
+
+        $("#person-name").text(decodedPerson);
+        $("#roles").text(result.roles.toString());
+        $("#movies").text(result.movieTitles.toString());
+    }
+}
+
+req.open("GET", "http://localhost:3000/people/getMoviesStarred/" + requestedPerson);
+req.send();

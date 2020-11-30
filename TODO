@@ -12,3 +12,5 @@ implement sessions
 get/movies -> DONE
 get/movies/movie  ->DONE
 post/movies ->  implement with database
+
+http://www.omdbapi.com

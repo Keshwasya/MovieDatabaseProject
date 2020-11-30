@@ -1,7 +1,5 @@
 'use strict';
 
-let req =null;
-
 /*function init(){ //displays correct nav bar items based on if the user is logged in or not  
     req = new XMLHttpRequest();
     req.onreadystatechange = function() {
@@ -44,38 +42,49 @@ function logout(){
     req.send();
 }*/
 
-$.getJSON('/js/movie-data-short.json', function(data) { 
+//$.getJSON('/js/movie-data-short.json', function(data) { 
     let rowCount = 0;
-    
-    $.each(data, function(i, movie) { //Loop through movie database
-        let row;
-        let column;
-        let link;
-        let image;
-        let strippedTitle;
+    let req = new XMLHttpRequest();
+    req.onreadystatechange = function() {
+        if(this.readyState==4 && this.status==200){
+            let data = $.parseJSON(this.response);
+            //console.log("Data: " + data);
+            
+            $.each(data, function(i, movie) { //Loop through movie database
+                let row;
+                let column;
+                let link;
+                let image;
+                let strippedTitle;
 
-        if(i < 9){ //dispays only 9 movies from database 
-            if (rowCount < 3) {
-                row = $(".container-fluid .row").last();
-    
-                rowCount++;
-            } else {
-                row = jQuery("<div>").addClass("row").appendTo();
-                row = $(".container-fluid .row").last();
-                rowCount = 0;
-            }
-    
-            column = jQuery("<div>").addClass("col-sm").appendTo(row);
-            strippedTitle = encodeURI(movie.Title);
-            //strippedTitle = strippedTitle.replace(/\s+/g, '');  //Removes spaces
-            link = $("<a>", {
-                href: "/html/moviePage.html?movie=" + strippedTitle
-            }).appendTo(column);
-            image = $("<img />", {
-                src: movie.Poster,
-                alt: movie.Title
-            }).appendTo(link);
+                if(i < 9){ //dispays only 9 movies from database 
+                    if (rowCount < 3) {
+                        row = $(".container-fluid .row").last();
+
+                        rowCount++;
+                    } else {
+                        row = jQuery("<div>").addClass("row").appendTo();
+                        row = $(".container-fluid .row").last();
+                        rowCount = 0;
+                    }
+
+                    column = jQuery("<div>").addClass("col-sm").appendTo(row);
+                    strippedTitle = encodeURI(movie.Title);
+                    //strippedTitle = strippedTitle.replace(/\s+/g, '');  //Removes spaces
+                    link = $("<a>", {
+                        href: "/html/moviePage.html?movie=" + strippedTitle
+                    }).appendTo(column);
+                    image = $("<img />", {
+                        src: movie.Poster,
+                        alt: movie.Title
+                    }).appendTo(link);
+                }
+
+            });
         }
-        
-    });
-});
+    };
+
+    req.open("GET", "http://localhost:3000/movie/getMovies/9");
+    req.send();
+    
+//});

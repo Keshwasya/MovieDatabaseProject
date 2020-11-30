@@ -54,7 +54,6 @@
                     <img id="poster" src="">
                     <br>
                     <p>Release Year: <span id="release"></span></p>
-                    <p>Rating: <span id="rating"></span>/10</p>
                     <p>Run Time: <span id="time"></span></p>
                     <p>Genre: <span id="genre"></span></p>
                     <p>Director: <span id="director"></span></p>
@@ -71,10 +70,30 @@
                 
             </div>
             <div class="col" >
-                <h3>Write a Review</h3>
-                <label for="comment">Review:</label>
-                <div id="review">
-                    <textarea class="form-control" rows="10" id="comment" placeholder="Enter Review"></textarea>
+                <h3>Reviews</h3>
+                <div id="ratings">
+                    <p>Average User Rating: <span id="user-rating">0</span></p>
+                    <p id="metascore"></p>
+                    <p id="imdb-rating"></p>
+                    <form id="review" action="/addReview" method="POST">
+                        <label for="basic-rating">Basic Rating:</label>
+                        <select name="basic-rating" id="basic-rating">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+                        <label for="comment">Write a review:</label>
+                        <textarea class="form-control" rows="10" id="comment" placeholder="Enter Review"></textarea>
+                        <input type="submit" id="submit">
+                    </form>
                 </div>
             </div>
             

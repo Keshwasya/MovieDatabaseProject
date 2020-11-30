@@ -6,6 +6,7 @@ router.post("/follow/:userToFollow&:user", followUser);
 router.post("/:user/unfollow/:targetUser", unfollowUser);
 router.get("/:user/follows/:targetUser", checkFollow);
 router.get("/:user", getUser);
+router.get("/isContributor", isContributor);
 
 let users = [];
 
@@ -86,6 +87,10 @@ function getUser(request, response) {
     //Send person param to page
     //response.redirect("/html/otherUserPage.html?username=" + request.params.username);
     response.redirect("/html/otherUserPage.html?username=" + request.params.user);
+}
+
+function isContributor(request, response) {
+    
 }
 
 module.exports = router;

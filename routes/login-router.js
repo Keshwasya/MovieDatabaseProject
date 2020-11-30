@@ -6,12 +6,12 @@ const fs = require("fs");
 router.post("/", login, (req,res,next) => {res.redirect("/html/homePage.html")});
 router.get("/", logout, (req,res,next) => {res.redirect("/html/homePage.html")}); 
 router.get("/check", userCheck); //sends the username to the client for dynamic navbar
-router.get("/checkUserStatus", checkUserStatus);
+router.get("/checkLogin", checkLogin);
 
 //router.post("/", login); //redirects to homepage 
 //router.get("/", logout); 
 
-function checkUserStatus(request, response) {
+function checkLogin(request, response) {
     if (request.session.loggedin == true) {
         response.end("true");
         console.log("User: " + request.session.username + " logged in");
