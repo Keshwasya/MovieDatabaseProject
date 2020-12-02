@@ -8,9 +8,15 @@ html body { /*Sets background to be black*/
 
   }
   #LogoName{
-    height: 300px; 
-    width: 500px; 
+    height: auto; 
+    max-width: 200px; 
   }
+
+#logo-text {
+    text-align: center;
+    color: #F96C85;
+}
+
   #Logo{
     height: 45px; 
     width: 70px; 

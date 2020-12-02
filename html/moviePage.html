@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="/css/movie.css">
         
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -33,7 +34,8 @@
 <body id="top" onload="init()">
     <div class="jumbotron text-center" style="margin-bottom:0">
         <!-- <h1 style="color: black;">The 7th Art</h1> -->
-        <a><img src="/images/Logo&Name.png"  alt="My Logo" id="LogoName"></a>
+        <a><img src="/images/Logo&Name.png"  alt="My Logo" id="LogoName" class="mx-auto d-block"></a>
+        <h1 id="logo-text">The 7th Art</h1>
         </div>
 
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
@@ -65,9 +67,19 @@
                 <br>
                 <p>Summary:</p>
                 <p id="summary">Goes here</p>
-            </div>
-            <div class="col" >
-                
+                <div id="review-table" class="table-wrapper-scroll-y">
+                    <table class="table table-striped table-bordered table-sm">
+                        <thead>
+                            <tr>
+                                <th class="th-sm">Username</th>
+                                <th class="th-sm">Rating (out of 10)</th>
+                                <th class="th-sm">Full Review</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-body">
+                        </tbody>
+                    </table>
+                </div>
             </div>
             <div class="col" >
                 <h3>Reviews</h3>
@@ -75,9 +87,9 @@
                     <p>Average User Rating: <span id="user-rating">0</span></p>
                     <p id="metascore"></p>
                     <p id="imdb-rating"></p>
-                    <form id="review" action="/addReview" method="POST">
+                    <form id="review" action="/movie/addReview/" method="POST">
                         <label for="basic-rating">Basic Rating:</label>
-                        <select name="basic-rating" id="basic-rating">
+                        <select name="basicRating" id="basic-rating">
                             <option value="0">0</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
@@ -91,7 +103,7 @@
                             <option value="10">10</option>
                         </select>
                         <label for="comment">Write a review:</label>
-                        <textarea class="form-control" rows="10" id="comment" placeholder="Enter Review"></textarea>
+                        <textarea class="form-control" name="fullReview" rows="10" id="comment" placeholder="Enter Review"></textarea>
                         <input type="submit" id="submit">
                     </form>
                 </div>

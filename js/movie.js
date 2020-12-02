@@ -45,8 +45,36 @@ function logout(){
     req.send();
 }*/
         //let strippedTitle = movie.Title.replace(/\s+/g, '');
+$("#review").attr("action", "/movie/addReview/" + requestedMovieStripped);
+
+$("#submit").submit(function(e) {   //Listener for submit
+    e.preventDefault();
+    console.log("Submit pressed");
+    let request = new XMLHttpRequest();
+    if (checkLogin == false) {
+        alert("You must login first");
+        window.location.replace("http://localhost:3000/html/login.html");
+        return false;
+    } else {
+        request.open("POST", "http://localhost:3000/movie/addReview");
+        request.send();
+    }
+});
 
 let req = new XMLHttpRequest();
+let reviewRequest = new XMLHttpRequest(); //req for reviews
+
+reviewRequest.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        let data = $.parseJSON(this.response);
+        
+        $.each(data, function(i, review) {
+            console.log("Review: " + review);
+            let tableRow = $("<tr></tr>");
+            let useCol = $("<td></td>").text();
+        });
+    }
+}
 
 req.onreadystatechange = function() {
     //let movie = this.response;
@@ -105,13 +133,11 @@ req.onreadystatechange = function() {
 
             $("#summary").text(movie.Plot);
             $("#poster").attr("src", movie.Poster);
+        
+            reviewRequest.open("GET", "http://localhost:3000/movie/getArrayofReviews/" + strippedTitle);
+            reviewRequest.send();
     }
 }
 
 req.open("GET", "http://localhost:3000/movie/getMovieData/" + requestedMovieStripped);
 req.send();
-
-$("#submit").submit(function(e) {   //Listener for submit
-    
-    e.preventDefault();
-});
