@@ -43,12 +43,15 @@ function getArrayofMovies(request, response) {
 
 function getArrayofReviews(request, response) {
     let movieName = decodeURI(request.params.movie);
-    let reviewsObject = request.app.locals.db.collection("movies").findOne({"Title": movieName}, {"review": 1, _id: 0}, function(err, reviews) {
+    
+    //Check if review object is empty, then send different
+    
+    let reviewsObject = request.app.locals.db.collection("movies").findOne({"Title": movieName}, {"fields": {"review": 1, _id: 0}}, function(err, document) {
         if (err) {
             throw err;
         }
-        console.log("Review object loaded: " + JSON.stringify(reviews));
-        response.send(reviews);
+        console.log("Review object loaded: " + JSON.stringify(document.review));
+        response.send(document.review);
         response.end();
     });
     //response.send(reviewsObject); //Send review field, excludes _id field.
@@ -62,7 +65,8 @@ function addReview(request, response) {
     if (request.session.loggedin == true) {
         let reviewObject = { "username": request.session.username,  "basicRating": request.body.basicRating, "fullReview": request.body.fullReview};
         //Updates movie with title == movieName
-        request.app.locals.db.collection("movies").update({"Title": movieName}, {$set: {"review": reviewObject}});
+        
+        request.app.locals.db.collection("movies").update({"Title": movieName}, {$push: {"review": reviewObject}});
         console.log("User: " + request.session.username + " added review to " + movieName);
     } else { //If not logged in, direct to login page
         response.redirect("http://localhost:3000/html/login.html");
@@ -71,6 +75,7 @@ function addReview(request, response) {
     let rating = request.body.fullReview;
     console.log(rating);
     console.log(request.body.basicRating);
+    response.redirect("/movie/" + request.params.movie);
     response.end();
 }
 
