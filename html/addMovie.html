@@ -39,21 +39,21 @@
         <h2><br>Add Movie Page</h2>
         <p>Enter new movie's details.</p>
 
-        <form>
+        <form id="movie-form" action="/movies/" method="POST">
             
             <div class="form-group">
-                <label for="Title">Enter Title:</label>
-                <input type="text" class="form-control" id="Title" placeholder="(ex.Toy Story)">
+                <label for="title">Enter Title*:</label>
+                <input type="text" class="form-control" id="title" name="title" placeholder="(ex.Toy Story)" required>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-3">
-                    <label for="Year">Enter Release Year:</label>
-                    <input type="number" class="form-control" id="Year" max="2021" min="1880" placeholder="(ex.1999)">
+                    <label for="year">Enter Release Year:</label>
+                    <input type="number" class="form-control" id="year" name="year" max="2021" min="1880" placeholder="(ex.1999)">
                 </div>
                 <div class="form-group col-md-3">
-                    <label for="Rated">Enter Movie Rating:</label>
+                    <label for="rated">Enter Movie Rating:</label>
                     <!-- <input type="text" class="form-control" id="Rated" placeholder="(ex.PG)"> -->
-                    <select id="Rated" class="form-control">
+                    <select id="rated" name="rated" class="form-control">
                         <option selected>NR</option>
                         <option>G</option>
                         <option>PG</option>
@@ -63,55 +63,55 @@
                 </div>
                 <div class="form-group col-md-3">
                     <label for="imdbRating">Enter Rating:</label>
-                    <input type="number" class="form-control" id="imdbRating" step=".1" min="0" max="10" placeholder="(ex.8.3)">
+                    <input type="number" class="form-control" id="imdbRating" name="imdbRating" step=".1" min="0" max="10" placeholder="(ex.8.3)">
                 </div>
                 <div class="form-group col-md-3">
-                    <label for="Runtime">Enter Runtime (in minutes):</label>
-                    <input type="number" class="form-control" min="0" max="300"id="Runtime" placeholder="(ex.81)">
+                    <label for="runtime">Enter Runtime (in minutes):</label>
+                    <input type="number" class="form-control" min="0" max="300"id="runtime" name="runtime" placeholder="(ex.81)">
                 </div>
             </div>
             
             
             <div class="form-group">
-                <label for="Poster">Enter Poster URL:</label>
-                <input type="text" class="form-control" id="Poster" placeholder="(ex.https://example.com)">
+                <label for="poster">Enter Poster URL:</label>
+                <input type="text" class="form-control" id="poster" name="poster" placeholder="(ex.https://example.com)">
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <label for="Director">Enter Director(s):</label>
-                    <input type="text" class="form-control" id="Director" placeholder="(ex.David Fincher)">
+                    <label for="director">Enter Director(s)*:</label>
+                    <input type="text" class="form-control" id="director" name="director" placeholder="(ex.David Fincher)" required>
                 </div>
-                <div class="form-group col-md-4">
-                    <label for="Actors">Enter Actors:</label>
-                    <input type="text" class="form-control" id="Actors" placeholder="(ex.Tom Hanks, Don Rickles... )">
+                <div class="form-group col-md-4" id="actors-div">
+                    <label for="actors">Enter Actors*:</label>
+                    <input type="text" class="form-control" id="actors" name="actors" placeholder="(ex.Tom Hanks, Don Rickles... )" required>
                 </div>
                 <div class="form-group col-md-2">
-                    <label for="Language">Enter Language:</label>
-                    <input type="text" class="form-control" id="Language" placeholder="(ex.English)">
+                    <label for="language">Enter Language:</label>
+                    <input type="text" class="form-control" id="language" name="language" placeholder="(ex.English)">
                 </div>
             </div>
             <div class="form-group">
-                <label for="Writer">Enter Writer(s):</label>
-                <input type="text" class="form-control" id="Writer" placeholder="(John Lasseter (original story by), Pete Docter (original story by), Andrew Stanton (screenplay by) ... )">
+                <label for="Writer">Enter Writer(s)*:</label>
+                <input type="text" class="form-control" id="writer" name="writer" placeholder="(John Lasseter (original story by), Pete Docter (original story by), Andrew Stanton (screenplay by) ... )" required>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="Genre">Enter Genres:</label>
-                <input type="text" class="form-control" id="Genre" placeholder="(ex.Animation, Adventure...)">
+                    <input type="text" class="form-control" id="genre" name="genre" placeholder="(ex.Animation, Adventure...)">
                 </div>
                 <div class="form-group col-md-4">
                     <label for="DVD">Enter DVD Release Date:</label>
-                    <input class="form-control" type="date" value="2011-08-19" id="DVD">
+                    <input class="form-control" type="date" value="2011-08-19" id="DVD" name="DVD">
                     <!-- <input type="text" class="form-control" id="DVD" placeholder="(ex.20 Mar 2001)"> -->
                 </div>
                 <div class="form-group col-md-2">
-                    <label for="Country">Enter Country:</label>
-                    <input type="text" class="form-control" id="Country" placeholder="(ex.USA)">
+                    <label for="country">Enter Country:</label>
+                    <input type="text" class="form-control" id="country" name="country" placeholder="(ex.USA)">
                 </div>
             </div>
             <div class="form-group">
-                <label for="Plot">Enter Plot:</label>
-                <textarea class="form-control" id="Plot" placeholder="Plot" rows="3"></textarea>
+                <label for="plot">Enter Plot:</label>
+                <textarea class="form-control" id="plot" name="plot" placeholder="Plot" rows="3"></textarea>
               </div>
             <!-- <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#popUp">Submit</button> -->
             <button type="submit" class="btn btn-outline-primary" id="submit">Submit</button>

@@ -87,7 +87,7 @@
                     <p>Average User Rating: <span id="user-rating">0</span></p>
                     <p id="metascore"></p>
                     <p id="imdb-rating"></p>
-                    <form id="review" action="/movie/addReview/" method="POST">
+                    <form id="review" action="/movies/addReview/" method="POST">
                         <label for="basic-rating">Basic Rating:</label>
                         <select name="basicRating" id="basic-rating">
                             <option value="0">0</option>
@@ -104,7 +104,7 @@
                         </select>
                         <label for="comment">Write a review:</label>
                         <textarea class="form-control" name="fullReview" rows="10" id="comment" placeholder="Enter Review"></textarea>
-                        <input type="submit" id="submit">
+                        <input type="submit" id="submit" class="btn btn-outline-primary">
                     </form>
                 </div>
             </div>

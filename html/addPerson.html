@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Add Movie</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  
+  <script src='https://kit.fontawesome.com/a076d05399.js'></script><!-- adds icons for bootstrap 4 -->
+  <link href="/images/favicon-16x16.png" rel="icon">
+  <link href="/css/database.css" rel="stylesheet"> <!--style sheet for database-->
+  <style>
+
+    html footer { 
+        align-content: center;
+        align-items: center;
+        align-self: center;
+        text-align: center;
+    }
+  </style>
+</head>
+    
+<body id="top" onload="init()">
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <a><img src="/images/navLogo.png"  alt="My Logo" id="Logo"></a>
+        <ul class="navbar-nav ml-auto" id="navBtns">
+            <!-- This is where the dynamic nav bar will load using ajax http request -->
+        </ul>
+    </nav>
+    
+    <div class="container">
+        <h2><br>Add Person</h2>
+        
+        <form id="person-form" action="/people/" method="POST">
+            <div class="form-row">
+                <label for="personName">Enter Person Name:</label>
+                <input type="text" class="form-control" id="personName" name="personName" required>
+            </div>
+            <button type="submit" class="btn btn-outline-primary">Submit</button>
+        </form>
+    </div>
+    
+    <footer>
+        <div class="bottom-bar">
+            <br>
+            <a href="#top"><i class="fa fa-arrow-up" aria-hidden=true></i></a>
+            <p>&copy;Kesh + Dan 2020</p>
+        </div>
+        
+    </footer>
+    <script src="/js/navbar.js"></script>
+    <script src="/js/addMovie.js"></script>
+</body>
+</html>
