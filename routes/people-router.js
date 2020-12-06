@@ -39,7 +39,7 @@ function getMoviesStarred(request, response) {
     let personName = request.params.person;
     let decodedName = decodeURI(personName);
     console.log("Searching for movies with " + decodedName);
-    let foundMovies = request.app.locals.db.collection("movies").find({ $or: [{"Director": decodedName, "Writer": {$regex: decodedName}, "Actors": {$regex: decodedName}}]}).toArray(function(err, document) {
+    let foundMovies = request.app.locals.db.collection("movies").find({ $or: [{"Director": decodedName}, {"Writer": {$regex: decodedName}}, {"Actors": {$regex: decodedName}}]}).toArray(function(err, document) {
         if (err) {
             throw err;
         } else if (document) { //Exists

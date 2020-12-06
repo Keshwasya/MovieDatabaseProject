@@ -9,9 +9,9 @@ let addUserRouter = require("./routes/signUp-router.js"); //connects the signUp-
 let searchDatabaseRouter = require("./routes/search-router.js"); //connects the search-router
 let loginRouter = require("./routes/login-router.js"); //connects the search-router
 let peopleRouter = require("./routes/people-router.js");
-let usersRouter = require("./routes/user-router.js");
+let usersRouter = require("./routes/users-router.js");
 let meRouter = require("./routes/me-router.js");
-let movieRouter = require("./routes/movie-router.js");
+let moviesRouter = require("./routes/movies-router.js");
 
 const mongo = require('mongodb');
 const mongoClient = mongo.MongoClient;
@@ -52,8 +52,8 @@ app.use("/images", express.static(__dirname + "/images"));
 
 app.use("/login", loginRouter);
 app.use("/addUser", addUserRouter);
-app.use('/movies', searchDatabaseRouter);
-app.use("/movie", movieRouter);
+//app.use('/movies', searchDatabaseRouter);
+app.use("/movies", moviesRouter);
 app.use("/people", peopleRouter);
 app.use("/me", meRouter);
 app.get('/users/users.json', function(req,res){

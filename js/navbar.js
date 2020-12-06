@@ -16,13 +16,26 @@ function init(){ //displays correct nav bar items based on if the user is logged
                 let navItems = '<li class="dropdown dropleft">\
                                     <a class="nav-link dropdown-toggle" style="color: lightpink;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
                                     ' + username +'</a>\
-                                    <div class="dropdown-menu">\
+                                    <div class="dropdown-menu" id="user-menu">\
                                         <a class="dropdown-item" href="/me/' + encodeURI(username) + '">User Page</a>\
                                         <a id="logout" class="dropdown-item" onclick="logout()" href="#">Log Out</a>\
                                     </div>\
                                 </li>'; // username.replace(/['"]+/g, '') gets rid of the double quotes around the
                                 //THE HREF IN THE USER PAGE ITEM WILL LINK TO YOUR PAGE
                 document.getElementById("navBtns").innerHTML = navItems;
+                
+                $.ajax({
+                    type: "GET",
+                    url: "/users/isContributor",
+                    success: function (data) {
+                        if (data == "true") {
+                            console.log("Appended contributor tools");
+                            $("<a></a>").addClass("dropdown-item").text("Add People").attr("href", "/html/addPerson.html").appendTo("#user-menu"); //Add people
+                            $("<a></a>").addClass("dropdown-item").text("Add Movie").attr("href", "/html/addMovie.html").appendTo("#user-menu");
+                        }
+                    }
+                });
+                
                 $("logout").click(function() {
                     logout(); 
                 });

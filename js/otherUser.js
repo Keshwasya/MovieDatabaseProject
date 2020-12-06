@@ -30,7 +30,7 @@ function initPage() {
            
            $.each(user.movies, function(j, movie) {
                 /*$("#recommended-movies").append("<a href='" + encodeURI("/movies/" + movie) + ">" + movie + "</a>"); */
-               $("<a href='" + encodeURI("/movie/" + encodeURI(movie)) + "'>" + movie + " </a>").appendTo("#recommended-movies");
+               $("<a href='" + encodeURI("/movies/" + encodeURI(movie)) + "'>" + movie + " </a>").appendTo("#recommended-movies");
             });
             
             $("#follow-btn").click(function(e) {

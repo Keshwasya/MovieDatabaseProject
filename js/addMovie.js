@@ -42,10 +42,14 @@ function logout(){
     req.send();
 }*/
 
-let btn = document.getElementById("submit");
-btn.onclick = addMovies;
+$("#submit").on("submit", function() {
+    
+});
 
-function addMovies(){
+//let btn = document.getElementById("submit");
+//btn.onclick = addMovies;
+
+/*function addMovies(){
     let Title = document.getElementById("Title").value;
     let Year = document.getElementById("Year").value;
     let Rated = document.getElementById("Rated").value;
@@ -89,4 +93,4 @@ function addMovies(){
     
 
     return true;
-}
+}*/

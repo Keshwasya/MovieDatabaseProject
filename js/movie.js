@@ -4,7 +4,7 @@ const requestedMovie = urlParams.get("movie");
 let requestedMovieStripped = encodeURI(requestedMovie);
 
         //let strippedTitle = movie.Title.replace(/\s+/g, '');
-$("#review").attr("action", "/movie/addReview/" + requestedMovieStripped);
+$("#review").attr("action", "/movies/addReview/" + requestedMovieStripped);
 
 $("#submit").submit(function(e) {   //Listener for submit
     e.preventDefault();
@@ -15,7 +15,7 @@ $("#submit").submit(function(e) {   //Listener for submit
         window.location.replace("http://localhost:3000/html/login.html");
         return false;
     } else {
-        request.open("POST", "http://localhost:3000/movie/addReview");
+        request.open("POST", "http://localhost:3000/movies/addReview");
         request.send();
     }
 });
@@ -26,9 +26,14 @@ let reviewRequest = new XMLHttpRequest(); //req for reviews
 reviewRequest.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
         let data = $.parseJSON(this.response);
+        let totalRatings = 0;   //Used to get average user rating
+        let numberOfRatings = 0;
         
         $.each(data, function(i, review) {
             if (i !== 0) {  //Empty review {} at beginning
+                numberOfRatings++;
+                totalRatings += review.basicRating;
+                
                 console.log("Review: " + JSON.stringify(review));
                 let tableRow = $("<tr></tr>").appendTo("#table-body");
                 
@@ -40,6 +45,8 @@ reviewRequest.onreadystatechange = function() {
                 let fullReview = $("<td></td>").text(review.fullReview).appendTo(tableRow);
             }
         });
+        
+        $("#user-rating").text(totalRatings / numberOfRatings);
     }
 }
 
@@ -101,10 +108,10 @@ req.onreadystatechange = function() {
             $("#summary").text(movie.Plot);
             $("#poster").attr("src", movie.Poster);
         
-            reviewRequest.open("GET", "http://localhost:3000/movie/getArrayofReviews/" + strippedTitle);
+            reviewRequest.open("GET", "http://localhost:3000/movies/getArrayofReviews/" + strippedTitle);
             reviewRequest.send();
     }
 }
 
-req.open("GET", "http://localhost:3000/movie/getMovieData/" + requestedMovieStripped);
+req.open("GET", "http://localhost:3000/movies/getMovieData/" + requestedMovieStripped);
 req.send();

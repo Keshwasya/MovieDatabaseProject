@@ -84,7 +84,7 @@ function logout(){
         }
     };
 
-    req.open("GET", "http://localhost:3000/movie/getMovies/9");
+    req.open("GET", "http://localhost:3000/movies/getMovies/9");
     req.send();
     
 //});
