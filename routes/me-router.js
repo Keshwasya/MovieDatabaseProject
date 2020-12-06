@@ -3,6 +3,7 @@ let router = express.Router();
 const fs = require("fs");
 
 router.get("/:user", getUser);
+router.get("/getUserData", getUserData);
 
 let users = [];
 //Will later on look at MongoDB database
@@ -26,6 +27,27 @@ function getUser(request, response) {
     //Send person param to page
     //response.redirect("/html/otherUserPage.html?username=" + request.params.username);
     response.redirect("/html/me.html?username=" + request.params.user);
+}
+
+function getUserData(request, response) {
+    if (request.session.loggedin == true) {
+        let username = request.session.username;
+        request.app.locals.db.collection("users").findOne({"username": username}, function(err, user) {
+           if (err) {
+               throw err;
+           } else if (user) {
+               console.log("User: " + username + " found");
+               response.send(user);
+               response.end();
+           } else {
+               console.log("Requested user: " + username + " not found.");
+               response.status(404).send("failed");
+           }
+        });
+    } else {    //User not logged in
+        response.redirect("/html/login.html");
+        response.end();
+    }
 }
 
 module.exports = router;

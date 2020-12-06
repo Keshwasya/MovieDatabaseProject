@@ -5,6 +5,18 @@ console.log(requestedUser);
 
 //me.js and me.html are for the logged in user
 
+$.ajax({
+    type: "GET",
+    url: "/users/isContributor",
+    success: function (data) {
+        if (data !== "failed") {
+            console.log("Appended contributor tools");
+            $("<a></a>").addClass("dropdown-item").text("Add People").attr("href", "/html/addPerson.html").appendTo("#user-menu"); //Add people
+            $("<a></a>").addClass("dropdown-item").text("Add Movie").attr("href", "/html/addMovie.html").appendTo("#user-menu");
+        }
+    }
+});
+
 $.getJSON('/users/users.json', function(data) { 
     $.each(data, function(i, user) {
         if (requestedUser === user.username) {

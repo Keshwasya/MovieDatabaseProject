@@ -58,35 +58,41 @@
     </nav>
 
     <div class="container">
-        <br>
-        
-        <h1><br><span id="username">User Page</span></h1>
-        
-        <br>
-        <br>
-        <h6 style="float: right;">Recommended Movies: <span id="recommended-movies"></span></h6>
-        <h6>Profile Pic:</h6>
-        <img class="userImg" id="profile-picture" src="">
-        <br>
-        <h6>Status</h6>
-        <div class="form-check">
-            <label class="form-check-label" for="check1">
-              <input type="checkbox" class="form-check-input" id="check1" value="something">Contributing Member
-            </label>
-        </div>
-          
-        <div class="form-check">
-            <label class="form-check-label" for="check2">
-              <input type="checkbox" class="form-check-input" id="check2" name="option2" value="something">View-Only Member
-            </label>
-        </div>
-        <br><br>
-        <h6>Users you folow: <span id="followed-users"></span></h6>
-        <br><br><br><br>
-        <h6>Actors/Directors/Writers you follow: <span id="followed-people"></span></h6>
+        <div class="row">
+            <div class="col">
+                <br>
 
-          
-        
+                <h1><br><span id="username">User Page</span></h1>
+
+                <br>
+                <br>
+                <h6>Profile Pic:</h6>
+                <img class="userImg" id="profile-picture" src="/images/user-placeholder.png">
+                <br>
+                <form id="update-form" action="/me/update" method="POST">
+                    <h6>Status</h6>
+                    <div class="form-row">
+                        <label for="updateProfilePic">Profile Picture URL:</label>
+                        <input type="text" class="form-control" id="updateProfilePic" name="updateProfilePic" placeholder="(e.g. localhost:3000/images/user-placeholder.png)">
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label" for="check1">
+                        <input type="checkbox" class="form-check-input" id="contributorCheckbox" name="contributorCheckbox">Contributing Member
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn-outline-primary" id="submit">Submit</button>
+                </form>
+                <br><br>
+                <h6>Users you folow: <span id="followed-users"></span></h6>
+                <br><br><br><br>
+                <h6>Actors/Directors/Writers you follow: <span id="followed-people"></span></h6>
+
+            </div>
+            <div class="col">
+                <h6>Recommended Movies: <span id="recommended-movies"></span></h6>
+            </div>
+
+        </div>
     </div>
 
     <footer>
