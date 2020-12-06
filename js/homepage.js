@@ -70,6 +70,7 @@ function logout(){
 
                     column = jQuery("<div>").addClass("col-sm").appendTo(row);
                     strippedTitle = encodeURI(movie.Title);
+                    
                     //strippedTitle = strippedTitle.replace(/\s+/g, '');  //Removes spaces
                     link = $("<a>", {
                         href: "/html/moviePage.html?movie=" + strippedTitle

@@ -49,7 +49,7 @@ function addMovies(){
     let Title = document.getElementById("Title").value;
     let Year = document.getElementById("Year").value;
     let Rated = document.getElementById("Rated").value;
-    let imdbRating = document.getElementById("imdbRating").value;
+    let imdbRating = parseInt(document.getElementById("imdbRating").value);
     let Runtime = document.getElementById("Runtime").value;
     let Poster = document.getElementById("Poster").value;
     let Director = document.getElementById("Director").value;
