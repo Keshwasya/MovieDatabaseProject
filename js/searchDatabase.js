@@ -1,44 +1,85 @@
 'use strict';
 
 let req = new XMLHttpRequest();
+let page = 1;
+let more = document.getElementById("moreBtn")
 
-/*function init(){ //displays all movies in database when page loads and loads dynamic navbar
-    req = new XMLHttpRequest();
+
+function loadMore(){
+    page++;
+    //window.location.reload();
     req.onreadystatechange = function() {
         if(this.readyState==4 && this.status==200){
-            let username = this.responseText; //gets the username from server
-            document.getElementById("navBtns").innerHTML = ""; //clears the navbar in case it had already been set
-
-            if(username == "" || username.length == 2){ //if not logged in then these items will be added to the nav bar
-                let navItems = '<li class="nav-item"> <a class="nav-link" href="/html/login.html"> <i class="fas fa-sign-in-alt" style="color: lightpink;"> </i> Login </a> </li> <li class="nav-item"> <a class="nav-link" href="/html/signUp.html"> <i class="fas fa-user-alt" style="color: lightpink;"> </i> Sign Up</a> </li> ';
-
-                document.getElementById("navBtns").innerHTML = navItems;
-                
-            }else{ //if logged in then these items will be added to the nav bar
-                let navItems = '<li class="dropdown dropleft">\
-                                    <a class="nav-link dropdown-toggle" style="color: lightpink;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
-                                    ' + username.replace(/['"]+/g, '') +'</a>\
-                                    <div class="dropdown-menu">\
-                                        <a class="dropdown-item" href="#">User Page</a>\
-                                        <a class="dropdown-item" onclick="logout()" href="#">Log Out</a>\
-                                    </div>\
-                                </li>'; // username.replace(/['"]+/g, '') gets rid of the double quotes around the
-                                //THE HREF IN THE USER PAGE ITEM WILL LINK TO YOUR PAGE
-
-                document.getElementById("navBtns").innerHTML = navItems;
-            }
-            //console.log("Username: " + username); //checking if username is correctly sent from server         
+            let div = document.getElementById("moviePosters");
+            div.innerHTML = "";
+            let result = JSON.parse(this.responseText);
+            if(result.length == 0){
+                let text = '<h5 style="text-align: center;">Sorry no movies in Database.  ¯\\_(ツ)_/¯<br><br><br><br><br><br></h5>';
+    
+                document.getElementById("noMatch").innerHTML = text;
+            }else{
+                document.getElementById("noMatch").innerHTML = "";
+            }            
+    
+            let rowCount = 0;
+            for(let x=0;x< page*9;x++){
+                //console.log(result[x]);
+            
+                let row;
+                let column;
+                let link;
+                let image;
+                let strippedTitle;
+    
+                if (rowCount < 3) {
+                    row = $(".container-fluid .row").last();
+    
+                    rowCount++;
+                } else {
+                    row = jQuery("<div>").addClass("row").appendTo();
+                    row = $(".container-fluid .row").last();
+    
+                    rowCount = 0;
+                }
+    
+                column = jQuery("<div>").addClass("col-sm").appendTo(row);
+                strippedTitle = result[x].Title;
+                //strippedTitle = strippedTitle.replace(/\s+/g, '');  //Removes spaces
+                link = $("<a>", {
+                    href: "/html/moviePage.html?movie=" + strippedTitle
+                }).appendTo(column);
+                image = $("<img />", {
+                    src: result[x].Poster,
+                    alt: result[x].Title,
+                    id: result[x].Title
+                }).appendTo(link);
+            }            
         }
     }
     
-    req.open("GET", `http://localhost:3000/login/check`);  //checks what the username is
+    req.open("GET", `http://localhost:3000/movies/search?chars=${""}`);
     req.send();
-}*/
-    
-    //displaying movies   
-    $.getJSON("/js/movie-data-short.json", function(data) { 
+}
+
+req = new XMLHttpRequest();
+req.onreadystatechange = function() {
+    if(this.readyState==4 && this.status==200){
+        let div = document.getElementById("moviePosters");
+        div.innerHTML = "";
+        let result = JSON.parse(this.responseText);
+        
+        if(result.length == 0){
+            let text = '<h5 style="text-align: center;">Sorry no movies in Database.  ¯\\_(ツ)_/¯<br><br><br><br><br><br></h5>';
+
+            document.getElementById("noMatch").innerHTML = text;
+        }else{
+            document.getElementById("noMatch").innerHTML = "";
+        }            
+
         let rowCount = 0;
-        $.each(data, function(i, movie) { //Loop through movie database
+        for(let x=0;x< page*9;x++){
+            console.log(result[x]);
+        
             let row;
             let column;
             let link;
@@ -52,34 +93,35 @@ let req = new XMLHttpRequest();
             } else {
                 row = jQuery("<div>").addClass("row").appendTo();
                 row = $(".container-fluid .row").last();
+
                 rowCount = 0;
             }
 
-        
             column = jQuery("<div>").addClass("col-sm").appendTo(row);
-            strippedTitle = movie.Title;
-            strippedTitle = strippedTitle.replace(/\s+/g, '');  
+            strippedTitle = result[x].Title;
+            //strippedTitle = strippedTitle.replace(/\s+/g, '');  //Removes spaces
             link = $("<a>", {
                 href: "/html/moviePage.html?movie=" + strippedTitle
             }).appendTo(column);
             image = $("<img />", {
-                src: movie.Poster,
-                alt: movie.Title,
+                src: result[x].Poster,
+                alt: result[x].Title,
+                id: result[x].Title
             }).appendTo(link);
-        });
-    });
+        }            
+    }
+}
 
-/*function logout(){
-    req = new XMLHttpRequest();
-
-    window.location.reload(); //reloads the page and resets the navbar
-    req.open("GET",`http://localhost:3000/login`);
-    req.send();
-}*/
+req.open("GET", `http://localhost:3000/movies/search?chars=${""}`); //gets all movies
+req.send();
+    
 
 
 let box = document.getElementById("searchBar");
-box.oninput = getMovies;
+let btn = document.getElementById("enter");
+btn.onclick = getMovies;
+//box.oninput = getMovies;
+
 
 function getMovies(){
     req = new XMLHttpRequest();
@@ -88,7 +130,8 @@ function getMovies(){
             let div = document.getElementById("moviePosters");
             div.innerHTML = "";
             let result = JSON.parse(this.responseText);
-            if(result.movies.length == 0){
+            more.style.display = "none";    
+            if(result.length == 0){
                 let text = '<h5 style="text-align: center;">Sorry no matches to search.  ¯\\_(ツ)_/¯<br><br><br><br><br><br></h5>';
 
                 document.getElementById("noMatch").innerHTML = text;
@@ -97,8 +140,8 @@ function getMovies(){
             }            
 
             let rowCount = 0;
-            for(let x=0;x<result.movies.length;x++){
-                console.log(result.movies[x]);
+            for(let x=0;x<result.length;x++){
+                //console.log(result[x]);
 
                 let row;
                 let column;
@@ -118,15 +161,15 @@ function getMovies(){
                 }
 
                 column = jQuery("<div>").addClass("col-sm").appendTo(row);
-                strippedTitle = result.movies[x].Title;
-                strippedTitle = strippedTitle.replace(/\s+/g, '');  //Removes spaces
+                strippedTitle = result[x].Title;
+                //strippedTitle = strippedTitle.replace(/\s+/g, '');  //Removes spaces
                 link = $("<a>", {
                     href: "/html/moviePage.html?movie=" + strippedTitle
                 }).appendTo(column);
                 image = $("<img />", {
-                    src: result.movies[x].Poster,
-                    alt: result.movies[x].Title,
-                    id: result.movies[x].Title
+                    src: result[x].Poster,
+                    alt: result[x].Title,
+                    id: result[x].Title
                 }).appendTo(link);
             }            
         }
@@ -149,40 +192,40 @@ function getGenre(genre){
     req.onreadystatechange = function() {
         if(this.readyState==4 && this.status==200){
             let result = JSON.parse(this.responseText);
-            if(result.movies){  //if there are movies in that genre
+            more.style.display = "none";  
+            if(result){  //if there are movies in that genre
                 let rowCount = 0;
+            for(let x=0;x<result.length;x++){
+                //console.log(result[x]);
 
-                for(let x=0;x<result.movies.length;x++){
-                    console.log(result.movies[x]);
-    
-                    let row;
-                    let column;
-                    let link;
-                    let image;
-                    let strippedTitle;
-    
-                    if (rowCount < 3) {
-                        row = $(".container-fluid .row").last();
-    
-                        rowCount++;
-                    } else {
-                        row = jQuery("<div>").addClass("row").appendTo();
-                        row = $(".container-fluid .row").last();
-    
-                        rowCount = 0;
-                    }
-    
-                    column = jQuery("<div>").addClass("col-sm").appendTo(row);
-                    strippedTitle = result.movies[x].Title;
-                    strippedTitle = strippedTitle.replace(/\s+/g, '');  //Removes spaces
-                    link = $("<a>", {
-                        href: "/html/moviePage.html?movie=" + strippedTitle
-                    }).appendTo(column);
-                    image = $("<img />", {
-                        src: result.movies[x].Poster,
-                        alt: result.movies[x].Title,
-                        id: result.movies[x].Title
-                    }).appendTo(link);
+                let row;
+                let column;
+                let link;
+                let image;
+                let strippedTitle;
+
+                if (rowCount < 3) {
+                    row = $(".container-fluid .row").last();
+
+                    rowCount++;
+                } else {
+                    row = jQuery("<div>").addClass("row").appendTo();
+                    row = $(".container-fluid .row").last();
+
+                    rowCount = 0;
+                }
+
+                column = jQuery("<div>").addClass("col-sm").appendTo(row);
+                strippedTitle = result[x].Title;
+                //strippedTitle = strippedTitle.replace(/\s+/g, '');  //Removes spaces
+                link = $("<a>", {
+                    href: "/html/moviePage.html?movie=" + strippedTitle
+                }).appendTo(column);
+                image = $("<img />", {
+                    src: result[x].Poster,
+                    alt: result[x].Title,
+                    id: result[x].Title
+                }).appendTo(link);
                 } 
             }else{ //if no movies in this genre
                 let div = document.getElementById("moviePosters");
@@ -198,6 +241,7 @@ function getGenre(genre){
     }
     req.open("GET", `http://localhost:3000/movies/genre/${genre}`);
     req.send();
+    
 }
 
 
